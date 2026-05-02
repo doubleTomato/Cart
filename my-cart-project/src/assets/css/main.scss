@@ -1,0 +1,6 @@
+@import 'reset.scss';
+
+.article-body {
+  @extend %noto-base;
+  font-weight: 300;
+}
