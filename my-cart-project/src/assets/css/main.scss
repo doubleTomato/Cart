@@ -1,8 +1,21 @@
 @import 'reset.scss';
+@import 'variable.scss';
 body {
   @include noto-sans(400);
   color: #333;
 }
+// common
+.badge{
+  width: 20px;
+  height: 20px;
+  background-color: $main_color;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 18px;
+  font-size: 0.8rem;
+}
+
 // header
 .headerWrap{
   width: 100%;
@@ -15,8 +28,13 @@ body {
   box-shadow: 3px 3px 3px #efefefaf;
   position: sticky;
   top: 0;
+  z-index: 99;
   .rightContent{
-    li{ display: flex; gap: 6px;}
+    li{ 
+      display: flex; gap: 6px; align-items: center;
+      font-size: 1.25rem;
+      i{ font-size: 1.25rem;}
+    }
   }
   .logo{
     .logo-image{
@@ -36,6 +54,44 @@ body {
     height: 100vh;
     height: calc(100dvh - 60px);
   }
-  // home
-  .home{ width: 100%; }
+  // home - 리스트 페이지
+  .home{ 
+    width: 100%;
+    .sliderWrap{ 
+      width: 100%; height: 475px; background-color: palegreen;
+      .swiper{
+        height: 100%;
+        .overflow-hidden {height: 100%;}
+        img{ object-fit: cover;}
+      }
+    }
+    .bottomContent{ 
+      width: 1200px; margin: 0 auto; background-color: palevioletred;
+      .tapWrap{
+        width: 100%; height: 60px; background-color: #fff;
+        border: 1px solid #efefef;
+        display: flex; justify-content: space-between;
+        ul{
+          height: 100%;
+          display: flex; align-items: center;
+          li{ 
+            padding: 0px 20px;
+            height: max-content;
+            position: relative;
+            font-size: 1.25rem;
+            &::after{
+              content: "";
+              display: block;
+              position: absolute;
+              right: 0;
+              top: 25%;
+              width: 1px;
+              height: 50%;
+              background-color: rgba(155, 155, 155, 0.604)
+            }
+          }
+        }
+      }
+    }
+  }
 }
