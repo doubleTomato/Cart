@@ -1,6 +1,41 @@
 @import 'reset.scss';
+body {
+  @include noto-sans(400);
+  color: #333;
+}
+// header
+.headerWrap{
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10%;
+  background-color: rgba(239, 239, 239, 0.9);
+  box-shadow: 3px 3px 3px #efefefaf;
+  position: sticky;
+  top: 0;
+  .rightContent{
+    li{ display: flex; gap: 6px;}
+  }
+  .logo{
+    .logo-image{
+      width: 200px;
+      height: 100px;
+    }
+  }
+}
+// == header end
 
-.article-body {
-  @extend %noto-base;
-  font-weight: 300;
+.mainLayout{
+
+  & > div{
+    width: 1200px;
+    background-color: orange;
+    margin: 0 auto;
+    height: 100vh;
+    height: calc(100dvh - 60px);
+  }
+  // home
+  .home{ width: 100%; }
 }

@@ -33,10 +33,7 @@ html {
 
 body {
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-family: system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
 ul, ol {
@@ -47,6 +44,13 @@ img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 button, input, select, textarea {
@@ -74,13 +78,43 @@ table {
   --main-font: "Noto Sans", sans-serif;
 }
 
-.article-body {
-  font-family: var(--main-font);
+body {
+  font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  color: #333;
 }
 
-.article-body {
-  font-weight: 300;
+.headerWrap {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10%;
+  background-color: rgba(239, 239, 239, 0.9);
+  box-shadow: 3px 3px 3px #efefef;
+  position: sticky;
+  top: 0;
+}
+.headerWrap .rightContent li {
+  display: flex;
+  gap: 6px;
+}
+.headerWrap .logo .logo-image {
+  width: 200px;
+  height: 100px;
+}
+
+.mainLayout > div {
+  width: 1200px;
+  background-color: orange;
+  margin: 0 auto;
+  height: 100vh;
+  height: calc(100dvh - 60px);
+}
+.mainLayout .home {
+  width: 100%;
 }/*# sourceMappingURL=main.css.map */

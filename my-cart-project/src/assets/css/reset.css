@@ -33,10 +33,7 @@ html {
 
 body {
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-family: system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
 ul, ol {
@@ -47,6 +44,13 @@ img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 button, input, select, textarea {

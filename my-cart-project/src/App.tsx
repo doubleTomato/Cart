@@ -1,11 +1,9 @@
 // import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import '@/App.css';
-import List from '@/pages/cart/List';
-import Detail from '@/pages/cart/Detail';
-import Cart from '@/pages/cart/Cart';
-import { Header } from '@/components/common/Header';
-import { Footer } from '@/components/common/Footer';
+import { MainLayout } from './layouts/MainLayout';
+import ProductListPage from '@/pages/cart/ProductListPage';
+import ProductDetailPage from '@/pages/cart/ProductDetailPage';
+import CartPage from '@/pages/cart/CartPage';
 
 
 function App() {
@@ -14,13 +12,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header/>
         <Routes>
-          <Route path="/" element={<List />} />
-          <Route path="/detail" element={<Detail/>} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<ProductListPage />} />
+            <Route path="/detail" element={<ProductDetailPage/>} />
+            <Route path="/cart" element={<CartPage/>} />
+          </Route>
         </Routes>
-        <Footer/>
       </BrowserRouter>
     </>
   )
