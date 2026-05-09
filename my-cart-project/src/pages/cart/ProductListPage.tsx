@@ -10,7 +10,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Image } from '@/components/common/Image';
-import { MAIN_TABS } from '@/constants/TabNav';
+import { MAIN_TABS } from '@/constants/tabNav'; // 정의된 탭 가져오기
+import { CLOTHING_PRODUCTS } from '@/constants/listProduct'; // 상품 데이터 가져오기
+import { CardItem } from '@/components/cart/CartItem';
 
 const banners = [
   { id: 1, imgUrl: "banner1.jpg", link: "/promotion/1" },
@@ -59,7 +61,13 @@ export default function ProductListPage() {
                     </select>
                 </nav>
                 {/* 무한 스크롤 */}
-                <div className="listWrap">리스트 공간</div>
+                <div className="listWrap">
+                    {
+                    CLOTHING_PRODUCTS.map((x) => (
+                        <CardItem key={x.id} product={x}/>
+                    ))
+                    }
+                </div>
             </div>
         </div>
     )

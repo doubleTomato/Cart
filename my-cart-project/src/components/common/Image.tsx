@@ -8,7 +8,6 @@ interface ImageProps {
 export const Image = ({ src, alt, classN = "" }: ImageProps) => {
     const [isError, setIsError] = useState(false);
     const defaultImage = "/images/no-image.png"; 
-    console.log(!src);
     return (
         <div className={`overflow-hidden bg-gray-100 ${classN}`}>
             <img

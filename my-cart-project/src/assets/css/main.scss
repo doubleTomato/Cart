@@ -1,5 +1,6 @@
 @import 'reset.scss';
 @import 'variable.scss';
+@import 'mixin.scss';
 body {
   @include noto-sans(400);
   color: #333;
@@ -46,13 +47,11 @@ body {
 // == header end
 
 .mainLayout{
-
   & > div{
     width: 1200px;
-    background-color: orange;
     margin: 0 auto;
-    height: 100vh;
-    height: calc(100dvh - 60px);
+    min-height: 100vh;
+    min-height: calc(100dvh - 60px);
   }
   // home - 리스트 페이지
   .home{ 
@@ -66,7 +65,7 @@ body {
       }
     }
     .bottomContent{ 
-      width: 1200px; margin: 0 auto; background-color: palevioletred;
+      width: 1200px; margin: 0 auto;
       .tapWrap{
         width: 100%; height: 60px; background-color: #fff;
         border: 1px solid #efefef;
@@ -93,5 +92,33 @@ body {
         }
       }
     }
-  }
+    .listWrap{
+      padding: 20px 0;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+      .cardItem{ 
+        width: calc( 25% - 20px );
+        .imgWrap{ width: 100%; height: 275px; background-color: aqua; margin-top: 10px;}
+        .textWrap{
+          margin-top: 10px;
+          .tit{ font-size: 1.35rem; font-weight: 500;  @include ellipsis}
+          .desc{ 
+            font-size: 1.1rem; font-weight:400; color: $sub_txt_color; margin-top: 5px;
+            @include ellipsis(3); height: 80px;
+          }
+          .priceBox{ 
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            .discountRate{display: inline-block; padding: 2.5px 5px; border-radius: 5px; background-color: $point_color; color: #fff; }
+            .price{ font-size: 1.8rem; color: $point_color}
+          }
+        }
+      }
+    }
+  } // == home end
 }
+footer{width: 100%; height: 100px; background-color: $main_color; color: $sub_color; padding: 15px 20px; margin-top: 20px; box-sizing: border-box;  }

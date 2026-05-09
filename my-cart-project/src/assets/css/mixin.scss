@@ -1,0 +1,13 @@
+@mixin ellipsis($line: 1, $w: 100%) {
+  width: $w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if $line == 1 { // 한줄일 시
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+  }
+}
