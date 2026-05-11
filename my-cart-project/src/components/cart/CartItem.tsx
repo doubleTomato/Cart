@@ -1,4 +1,5 @@
 // 리스트 아이템
+import { Link } from "react-router-dom";
 import { Image } from "../common/Image";
 import type { Product, CartItem } from '@/shared/types/product';
 
@@ -11,21 +12,23 @@ export const CardItem = ( { product } : ProductProps ) => {
     console.log(saleType);
     return (
         <div className="cardItem" data-id={id}>
-            <div className="imgWrap">
-                <Image 
-                src={imgUrl} 
-                alt="서비스 로고" 
-                classN="logo-image"/>
-                <span className="badge sale"></span>
-            </div>
-            <div className="textWrap">
-                <p className="tit">{title}</p>
-                <p className="desc">{desc}</p>
-                <div className="priceBox">
-                    {saleType && <span className="discountRate">{saleType}</span>}
-                    <span className="price">{price.toLocaleString() ?? 0}원</span>
+            <Link to={'/detail/' + id}>
+                <div className="imgWrap">
+                    <Image 
+                    src={imgUrl} 
+                    alt="서비스 로고" 
+                    classN="logo-image"/>
+                    <span className="badge sale"></span>
                 </div>
-            </div>
+                <div className="textWrap">
+                    <p className="tit">{title}</p>
+                    <p className="desc">{desc}</p>
+                    <div className="priceBox">
+                        {saleType && <span className="discountRate">{saleType}</span>}
+                        <span className="price">{price.toLocaleString() ?? 0}원</span>
+                    </div>
+                </div>
+            </Link>
         </div>
     )
 } 

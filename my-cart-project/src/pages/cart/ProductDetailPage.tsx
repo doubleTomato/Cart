@@ -1,4 +1,9 @@
 
 export default function ProductDetailPage() {
-    return <div>2</div>
+    
+    return (
+        <div className="detailPage">
+
+        </div>
+    )
 }
