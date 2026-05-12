@@ -1,4 +1,8 @@
-export const DISCOUNT_POLICIES = {
+export interface DiscountPolicyValue {
+  label: string;
+  rate: number;
+}
+export const DISCOUNT_POLICIES:Record<string, DiscountPolicyValue> = {
   SPRING_SALE: { label: "봄맞이 세일", rate: 15 },
   WEEKEND_DUO: { label: "주말 특가", rate: 10 },
   CLEARANCE: { label: "시즌 오프", rate: 40 },

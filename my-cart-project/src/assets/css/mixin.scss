@@ -1,3 +1,4 @@
+// 줄바꿈 줄수, 가로
 @mixin ellipsis($line: 1, $w: 100%) {
   width: $w;
   overflow: hidden;
@@ -9,5 +10,20 @@
     -webkit-line-clamp: $line;
     -webkit-box-orient: vertical;
     word-break: break-word;
+  }
+}
+
+// button
+@mixin btn($type: "default"){
+  padding: 15px 30px;
+  border-radius: 2.5px;
+  background-color: #eee;
+  color: $default_txt_color;
+  font-weight: 500;
+  font-size: 1.35rem;
+  display: inline-block;
+  @if $type == "cta"{
+    background-color: $point_color;
+    color: #fff;
   }
 }
