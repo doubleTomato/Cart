@@ -14,16 +14,21 @@
 }
 
 // button
-@mixin btn($type: "default"){
-  padding: 15px 30px;
-  border-radius: 2.5px;
-  background-color: #eee;
-  color: $default_txt_color;
-  font-weight: 500;
-  font-size: 1.35rem;
-  display: inline-block;
-  @if $type == "cta"{
-    background-color: $point_color;
-    color: #fff;
+
+@mixin btn-variant($bg, $color, $border: transparent) {
+  background-color: $bg;
+  color: $color;
+  border: 1px solid $border;
+
+  &:hover {
+    background-color: darken($bg, 5%);
+    border-color: darken($border, 5%);
+    transform: translateY(-1px);
+    box-shadow: $btn-shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+    background-color: darken($bg, 10%);
   }
 }

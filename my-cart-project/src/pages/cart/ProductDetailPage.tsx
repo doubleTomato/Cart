@@ -4,18 +4,26 @@ import type { Product } from '@/shared/types/product';
 import type { DiscountPolicyValue } from '@/constants/discountPolicy';
 import { useParams } from 'react-router-dom';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
+import { CustomSelect } from '@/components/common/CustomSelect';
+import type { SelectOption } from '@/shared/types/select';
+
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
     const [products, setProducts] = useState<Product | null >(null);
     const [sales, setSales] = useState<Record<string, DiscountPolicyValue>>({});
     const [isLoading, setIsLoading] = useState(true);
 
+    const [filters, setFilters] = useState({
+        color: undefined as SelectOption | undefined,
+        size: undefined as SelectOption | undefined,
+    });
+
     useEffect(() => {
     if (!id) return;
     getProductById(parseInt(id)).then((data) => {
         if(data) setProducts(data);
         setIsLoading(false);
-    });
+    },);
 
     if (!id) return;
         getSaleInfo().then((data) => {
@@ -23,10 +31,20 @@ export default function ProductDetailPage() {
        
     });
 
-  }, []);
+  }, [id]);
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
     if (isLoading) return <div>로딩 중...</div>;
     const {material, thickness, flexibility} = products?.detail?.specs || {};
+    
+    const colorOptions = products?.detail?.colors.map((color) => ({
+        label: color,
+        value: color
+    }));
+    const sizeOptions = products?.detail?.sizes.map((size) => ({
+        label: size,
+        value: size
+    }));
+    
     return( 
         <div className="detail">
             <div className='leftContent'>
@@ -56,19 +74,20 @@ export default function ProductDetailPage() {
                 <div className='productEctAction'>
                     <p>배송정보</p>
                     <p>배송비</p>
-                    <select name="color-sel">
-                        {products?.detail?.colors.map((x,i) =>(
-                            <option key={"color-"+i} value={x}>{x}</option>
-                        ))}
-                    </select>
-                    <select name="size-sel">
-                        {products?.detail?.sizes.map((x,i) =>(
-                            <option key={"sizes-"+i} value={x}>{x}</option>
-                        ))}
-                    </select>
+                    <CustomSelect sName="color-sel" 
+                    options={colorOptions ?? []}
+                    value={filters.color}
+                    onChange={(selectedOption)=> {setFilters({...filters, color: selectedOption})}}
+                    />
+                    <CustomSelect sName="size-sel" 
+                    options={sizeOptions ?? []}
+                    value={filters.size}
+                    onChange={(selectedOption)=> {setFilters({...filters, size: selectedOption})}}
+                    />
+                   
                     <div className='buttonWrap'>
-                        <button className='btn'>바로구매</button>
-                        <button className='btn cta'>장바구니 추가</button>
+                        <button className='btn primary lg'>바로구매</button>
+                        <button className='btn secondary lg'>장바구니 추가</button>
                     </div>
                 </div>
                 <hr/>

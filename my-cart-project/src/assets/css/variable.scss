@@ -1,8 +1,15 @@
+// color    
 $main_color: #4A4A4A;
 $sub_color: #F8F7F5;
 $point_color: #7D6E5D;
-$default_txt_color: #333;
-$sub_txt_color: #666;
 $disabeld_color: #ccc;
 
 // text
+$default_txt_color: #333;
+$sub_txt_color: #666;
+
+
+//button
+$btn-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$btn-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+$btn-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
