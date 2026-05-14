@@ -142,20 +142,27 @@ body {
 .btn.secondary:hover {
   background-color: rgba(125, 110, 93, 0.6);
 }
-.btn.outline {
+.btn.inherit {
   background-color: transparent;
-  color: #333;
-  border: 1px solid #e4e4e7;
+  color: transparent;
+  border: 1px solid transparent;
 }
-.btn.outline:hover {
+.btn.inherit:hover {
   background-color: rgba(0, 0, 0, 0);
-  border-color: rgb(214.5, 214.5, 219);
+  border-color: rgba(0, 0, 0, 0);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-.btn.outline:active {
+.btn.inherit:active {
   transform: translateY(0);
   background-color: rgba(0, 0, 0, 0);
+}
+.btn.inherit {
+  color: #333;
+}
+.btn.inherit:hover {
+  background-color: rgba(74, 74, 74, 0.6) !important;
+  color: #fff;
 }
 .btn.outline:hover {
   background-color: #f4f4f5;
@@ -189,7 +196,6 @@ body {
 .customSelectWrap {
   min-width: 120px;
   border-radius: 5px;
-  background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
 }
@@ -389,7 +395,7 @@ body {
   margin: 20px 10px;
 }
 .mainLayout .detail .rightContent > div > * {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .mainLayout .detail .rightContent h1 {
   font-size: 1.5rem;
@@ -442,6 +448,69 @@ body {
   border-radius: 5px;
   padding: 5px 10px;
   color: #fff;
+}
+.mainLayout .detail .selectProductWrap {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
+  background-color: #eee;
+  padding: 10px 20px;
+  width: 100%;
+  min-height: 80px;
+  margin-top: 10px;
+}
+.mainLayout .detail .selectProductWrap dt, .mainLayout .detail .selectProductWrap dd {
+  display: flex;
+}
+.mainLayout .detail .selectProductWrap dt {
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.mainLayout .detail .selectProductWrap dt .closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.mainLayout .detail .selectProductWrap dt > div > span {
+  font-size: 1rem;
+  color: #666;
+}
+.mainLayout .detail .selectProductWrap dt > div > span::after {
+  content: "|";
+  color: #666;
+  display: inline-block;
+  vertical-align: text-bottom;
+  padding: 0 5px;
+}
+.mainLayout .detail .selectProductWrap dd {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+}
+.mainLayout .detail .selectProductWrap dd .countBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mainLayout .detail .selectProductWrap dd .countBox div {
+  border: 1px solid #ccc;
+  background-color: #e4e4e7;
+  padding: 5px 2.5px;
+}
+.mainLayout .detail .selectProductWrap dd .countBox div:nth-child(2) {
+  border-width: 0px;
+  background-color: transparent;
+}
+.mainLayout .detail .selectProductWrap dd .price {
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 footer {

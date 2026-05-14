@@ -39,9 +39,17 @@ body {
      background-color: rgba($point_color, 0.6);
     }
   }
+    // 가로/세로 및 배경 부모에게서 받는
+  &.inherit{
+      @include btn-variant(transparent, transparent);
+      color: $default_txt_color;
+      &:hover {
+       background-color: rgba($main_color, 0.6)!important;
+       color: #fff;
+      }
+    }
 
   &.outline {
-    @include btn-variant(transparent, #333, #e4e4e7);
     &:hover {
       background-color: #f4f4f5;
       border-color: #d4d4d8;
@@ -71,9 +79,7 @@ body {
 }
 .customSelectWrap{ 
     min-width: 120px;
-    border-radius: 5px; 
-    background-color: #fff; border: 1px solid #ccc;
-    box-shadow: 1px 2px 7px 0px #33333357;
+    @include box-shadow-default;
     .customOpenBtn{ 
       display: flex; justify-content: space-between; align-items: center;
       width: 100%; padding: 10px 20px; 
@@ -207,7 +213,7 @@ body {
     // 상품정보
     .rightContent{
        hr{margin: 20px 10px;}
-      & > div > * { margin-top: 10px;}
+      & > div > * { margin-top: 20px;}
       h1{font-size: 1.5rem; font-weight: 400;}
       .saleType{ // saleType별 색상 지정 보류 중
         font-size: 0.9rem;
@@ -242,6 +248,56 @@ body {
       ul{ 
         display: flex; gap: 10px;
         li{ background-color: $main_color; border-radius: 5px; padding: 5px 10px; color: #fff}
+      }
+    }
+    // 장바구니에 담긴 아이템
+    .selectProductWrap{
+      @include box-shadow-default;
+      background-color: #eee;
+      padding: 10px 20px;
+      width: 100%;
+      min-height: 80px;
+      margin-top: 10px;
+      dt,dd{display: flex;}
+      dt{
+        position: relative;
+        align-items: center;
+        gap: 10px;
+        height: 40px;
+        font-size: 1.35rem;
+        font-weight: 500;
+        .closeBtn{
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+        & > div > span{ 
+          font-size: 1rem; color: $sub_txt_color;
+          &::after{
+            content: "|";
+            color: $sub_txt_color;
+            display: inline-block;
+            vertical-align: text-bottom;
+            padding: 0 5px;
+          }
+        }
+      }
+      dd{
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #ccc;
+        font-size: 1.25rem;
+        display: flex; justify-content: space-between;
+        .countBox{ 
+          display: flex; align-items: center; gap: 5px;
+          div{
+            border: 1px solid #ccc; background-color: #e4e4e7;
+            padding: 5px 2.5px;
+            &:nth-child(2){border-width: 0px; background-color: transparent;}
+          }
+         } //== countBox end
+         .price{font-size: 1.75rem; font-weight: 600;}
+         
       }
     }
   }//==상세 끝

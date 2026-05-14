@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
 import { CustomSelect } from '@/components/common/CustomSelect';
 import type { SelectOption } from '@/shared/types/select';
-
+import type { SelectedItemData } from '@/shared/types/selectedProduct';
+import { SelectedItemCard } from '@/components/product/SelectProduct';
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
     const [products, setProducts] = useState<Product | null >(null);
@@ -18,18 +19,24 @@ export default function ProductDetailPage() {
         size: undefined as SelectOption | undefined,
     });
 
-    useEffect(() => {
-    if (!id) return;
-    getProductById(parseInt(id)).then((data) => {
-        if(data) setProducts(data);
-        setIsLoading(false);
-    },);
+    // id count AI(Auto Increment)
+    const [pId, setPId] = useState(0);
 
-    if (!id) return;
-        getSaleInfo().then((data) => {
-        if(data) setSales(data);
-       
-    });
+    // 선택한 아이템
+    const [selectedProducts, setSelectedProducts] = useState<SelectedItemData[]>([]);
+
+    useEffect(() => {
+        if (!id) return;
+        getProductById(parseInt(id)).then((data) => {
+            if(data) setProducts(data);
+            setIsLoading(false);
+        },);
+
+        if (!id) return;
+            getSaleInfo().then((data) => {
+            if(data) setSales(data);
+            
+        });
 
   }, [id]);
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
@@ -45,6 +52,66 @@ export default function ProductDetailPage() {
         value: size
     }));
     
+   // 수량 증가
+  const handleIncrease = (id: string | number) => {
+    setSelectedProducts((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // 수량 감소 (1미만으로 안내려가게)
+  const handleDecrease = (id: string | number) => {
+    setSelectedProducts((prev) =>
+      prev.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
+
+  // 항목 삭제
+  const handleRemove = (id: string | number) => {
+    setSelectedProducts((prev) => prev.filter((item) => item.id !== id));
+  };
+
+
+    // 장바구니 클릭 시 작동
+    const changeSelect = () => {
+       if(!filters.color) alert("색상을 선택해주세요.");
+       else if(!filters.size) alert("사이즈 선택해주세요.");
+       else{
+        let isDuplicate = false; // 중복 체크
+        // 중복되는 값이 있다면 count를 올리기
+        setSelectedProducts(selectedProducts.map(p =>
+            {
+                if(p.color === filters.color?.value && p.size === filters.size?.value){
+                    console.log('중복 o', selectedProducts);
+                    isDuplicate = true;
+                   return {...p, quantity: p.quantity + 1 } 
+                }else{
+                    return p;
+                }
+            })
+        );
+        if(isDuplicate) return;
+        setPId(pId + 1);
+        const newItem = {
+            id: String(pId) + filters.color.value + filters.size.value,
+            color: filters.color.value as string,
+            size: filters.size.value as string,
+            price: discountedPrice,
+            quantity: 1
+        }
+        setSelectedProducts([...selectedProducts, newItem]);
+        console.log('중복값 x',selectedProducts);
+        }
+       setFilters({ color: undefined, size: undefined });
+    }
+
+
     return( 
         <div className="detail">
             <div className='leftContent'>
@@ -84,10 +151,24 @@ export default function ProductDetailPage() {
                     value={filters.size}
                     onChange={(selectedOption)=> {setFilters({...filters, size: selectedOption})}}
                     />
-                   
+                   <div className='selectedProduct'>
+                    {selectedProducts.map((p) => (
+                        <SelectedItemCard
+                            key={p.id}
+                            id={p.id}
+                            color={p.color}
+                            size={p.size}
+                            price={discountedPrice}
+                            quantity={p.quantity}
+                            onIncrease={handleIncrease}
+                            onDecrease={handleDecrease}
+                            onRemove={handleRemove}
+                        />
+                    ))}
+                   </div>
                     <div className='buttonWrap'>
                         <button className='btn primary lg'>바로구매</button>
-                        <button className='btn secondary lg'>장바구니 추가</button>
+                        <button className='btn secondary lg' onClick={changeSelect}>장바구니 추가</button>
                     </div>
                 </div>
                 <hr/>
