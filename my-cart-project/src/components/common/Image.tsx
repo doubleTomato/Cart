@@ -13,8 +13,8 @@ export const Image = ({ src, alt, classN = "" }: ImageProps) => {
             <img
               // 에러 시 기본이미지 출력
               src={isError || !src ?  defaultImage : "/images/" + src}
-              alt={alt}
-              className="default-image"
+              className={`default-image ${classN}`}
+              alt={`${alt}`}
               // 이미지 로드 실패 시 true로 변경
               onError={() => setIsError(true)}
               loading="lazy"

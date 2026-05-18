@@ -17,14 +17,14 @@ export const SelectedItemCard = ({
     return (
         <dl className="selectProductWrap">
             <dt>
-                {title && <div>{title}</div>}
+                {variant !== 'detail' && <div>{title}</div>}
                 <div className="color"><span>색상</span> {color}</div>
                 <div className="size"><span>사이즈</span> {size}</div>
                 <button className="closeBtn" onClick={() => onRemove(id)}><MdOutlineClose/></button>
             </dt>
             <dd>
                 <div className="countBox">
-                    <div className="btn inherit" onClick={() => onDecrease(id)}><FaMinus /></div>
+                    <div className={`btn inherit ${quantity === 1 ? 'disabled' : ''}`} onClick={() => onDecrease(id)}><FaMinus /></div>
                     <div>{quantity}</div>
                     <div className="btn inherit" onClick={() => onIncrease(id)}><FaPlus /></div>
                 </div>

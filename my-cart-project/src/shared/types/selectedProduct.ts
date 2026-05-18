@@ -1,5 +1,6 @@
 export interface  SelectedItemData {
-    id: string | number;
+    id: string;
+  productId: number;
   color: string;
   size: string;
   price: number;

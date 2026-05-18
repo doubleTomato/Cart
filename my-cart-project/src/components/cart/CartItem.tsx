@@ -1,7 +1,7 @@
 // 리스트 아이템
 import { Link } from "react-router-dom";
 import { Image } from "../common/Image";
-import type { Product, CartItem } from '@/shared/types/product';
+import type { Product } from '@/shared/types/product';
 
 interface ProductProps {
   product: Product; 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useCartStore } from '@/stores/useCartStore';
 import { getProductById, getSaleInfo } from "@/api/productService";
 import type { Product } from '@/shared/types/product';
 import type { DiscountPolicyValue } from '@/constants/discountPolicy';
@@ -8,6 +9,7 @@ import { CustomSelect } from '@/components/common/CustomSelect';
 import type { SelectOption } from '@/shared/types/select';
 import type { SelectedItemData } from '@/shared/types/selectedProduct';
 import { SelectedItemCard } from '@/components/product/SelectProduct';
+import { Image } from '@/components/common/Image';
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
     const [products, setProducts] = useState<Product | null >(null);
@@ -19,26 +21,49 @@ export default function ProductDetailPage() {
         size: undefined as SelectOption | undefined,
     });
 
-    // id count AI(Auto Increment)
-    const [pId, setPId] = useState(0);
+    // 메인 이미지
+    const [mainImg, setMainImg] = useState('');
 
     // 선택한 아이템
     const [selectedProducts, setSelectedProducts] = useState<SelectedItemData[]>([]);
 
+
+    // total 가격 및 값
+
     useEffect(() => {
         if (!id) return;
-        getProductById(parseInt(id)).then((data) => {
-            if(data) setProducts(data);
+
+        setIsLoading(true);
+        
+        Promise.all([
+            getProductById(parseInt(id)),
+            getSaleInfo()
+        ]).then(([productData, saleData]) => {
+            if (productData) {
+                setProducts(productData);
+                setMainImg(productData.imgUrl);
+            }
+            if (saleData) {
+                setSales(saleData);
+            }
             setIsLoading(false);
-        },);
-
-        if (!id) return;
-            getSaleInfo().then((data) => {
-            if(data) setSales(data);
-            
+        }).catch(() => {
+            setIsLoading(false);
         });
+    }, [id]);
 
-  }, [id]);
+        // 장바구니에 추가
+    const addItem = useCartStore((state) => state.addItem);
+
+    const handleAddToCart = () => {
+        selectedProducts.map((v) => (
+            addItem(v)
+        ));        
+        alert("장바구니에 담겼습니다!");
+
+    };
+
+
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
     if (isLoading) return <div>로딩 중...</div>;
     const {material, thickness, flexibility} = products?.detail?.specs || {};
@@ -78,58 +103,77 @@ export default function ProductDetailPage() {
   };
 
 
-    // 장바구니 클릭 시 작동
-    const changeSelect = () => {
-       if(!filters.color) alert("색상을 선택해주세요.");
-       else if(!filters.size) alert("사이즈 선택해주세요.");
-       else{
-        let isDuplicate = false; // 중복 체크
+ // 사이즈 선택 시 작동
+    const changeSelect = (selectedOption:SelectOption) => {
+       if(!filters.color){
+        alert("색상을 선택해주세요.");
+        return;
+       }
+        const curSize = selectedOption.value;
+        const curColor = filters.color.value;
+        const targetCombinationId = `${products?.id}-${curColor}-${curSize}`;
+
+        setFilters({...filters, size: selectedOption})
+        let isDuplicate = selectedProducts.some(p => p.id === targetCombinationId); // 중복 체크
         // 중복되는 값이 있다면 count를 올리기
-        setSelectedProducts(selectedProducts.map(p =>
-            {
-                if(p.color === filters.color?.value && p.size === filters.size?.value){
-                    console.log('중복 o', selectedProducts);
-                    isDuplicate = true;
-                   return {...p, quantity: p.quantity + 1 } 
-                }else{
-                    return p;
-                }
-            })
-        );
-        if(isDuplicate) return;
-        setPId(pId + 1);
+
+        if(isDuplicate){
+            setSelectedProducts(prev => 
+                prev.map(p => p.id === targetCombinationId ? { ...p, quantity: p.quantity + 1 } : p)
+            );
+            return;
+        }
+      setSelectedProducts(prev => {
         const newItem = {
-            id: String(pId) + filters.color.value + filters.size.value,
-            color: filters.color.value as string,
-            size: filters.size.value as string,
+            id: targetCombinationId,
+            title: products?.title,
+            productId: products?.id,
+            color: String(curColor),
+            size: String(curSize),
             price: discountedPrice,
             quantity: 1
-        }
-        setSelectedProducts([...selectedProducts, newItem]);
-        console.log('중복값 x',selectedProducts);
-        }
-       setFilters({ color: undefined, size: undefined });
+        };
+        return [...prev, newItem];
+    });
+        setFilters({ color: undefined, size: undefined });
     }
+
+    // img mapping
+    const imgList = [products?.imgUrl, ...products?.detail?.images || []].filter(Boolean);
+
+
+
+    // total 합계 및 갯수
+    const totalRe = selectedProducts.reduce((acc, cur) => {
+        return {
+            price: acc.price + (cur.price * cur.quantity),
+            quantity: acc.quantity + cur.quantity
+        };
+    }, { price: 0, quantity: 0 });
+
+
 
 
     return( 
         <div className="detail">
             <div className='leftContent'>
-               <div>메인 이미지</div>
+               <div><Image src={mainImg} alt={mainImg || ''}/></div>
                <ul>
-                    {products?.detail?.images.map((x,i) =>(
-                        <li key={"images-"+i} value={x}>{x}</li>
+                    {imgList.map((x,i) =>(
+                        <li className={mainImg === x ? "active" : ''} key={"images-"+i} onClick={() => setMainImg(x)}>
+                            <Image src={x} alt={x || ''}/>
+                        </li>
                     ))}
                </ul>
             </div>
             <div className='rightContent'>
                 <div className='productInfo'>
                     <h1>{products?.title}</h1>
-                    <p className='saleType'>{products?.discountPolicy && sales?.[products?.discountPolicy].label}</p>
+                    {products?.discountPolicy && <p className='saleType'>{products?.discountPolicy && sales?.[products?.discountPolicy].label}</p>}
                     <p className='desc'>{products?.desc}</p>
                     <div className='ratingWrap'></div>
                     <p>
-                        <span className='originPrice'>{products?.price.toLocaleString() ?? 0}원</span>
+                        <span className={`originPrice ${!products?.discountPolicy && 'noSale'}`}>{products?.price.toLocaleString() ?? 0}원</span>
                     </p>
                     {products?.discountPolicy && 
                     <p className='salePrice'>
@@ -149,7 +193,7 @@ export default function ProductDetailPage() {
                     <CustomSelect sName="size-sel" 
                     options={sizeOptions ?? []}
                     value={filters.size}
-                    onChange={(selectedOption)=> {setFilters({...filters, size: selectedOption})}}
+                    onChange={(selectedOption) => {changeSelect(selectedOption)}}
                     />
                    <div className='selectedProduct'>
                     {selectedProducts.map((p) => (
@@ -166,9 +210,14 @@ export default function ProductDetailPage() {
                         />
                     ))}
                    </div>
+                   <hr/>
+                   <div className='totalPrice'>
+                        <p>총 {totalRe.quantity}개</p>
+                        <p>{totalRe.price.toLocaleString()}원</p>
+                   </div>
                     <div className='buttonWrap'>
                         <button className='btn primary lg'>바로구매</button>
-                        <button className='btn secondary lg' onClick={changeSelect}>장바구니 추가</button>
+                        <button className='btn secondary lg' onClick={handleAddToCart}>장바구니 추가</button>
                     </div>
                 </div>
                 <hr/>

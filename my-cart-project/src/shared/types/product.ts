@@ -23,6 +23,8 @@ export interface Product {
     };
   };
 }
-export interface CartItem extends Product {
+export interface CartItem extends Pick<Product, 'id' | 'title' | 'price' | 'imgUrl'> {
+  color: string;
+  size: string;
   quantity: number;
 }

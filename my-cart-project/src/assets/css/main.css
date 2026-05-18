@@ -119,7 +119,6 @@ body {
 }
 .btn.primary:active {
   transform: translateY(0);
-  background-color: rgb(48.5, 48.5, 48.5);
 }
 .btn.primary:hover {
   background-color: rgba(74, 74, 74, 0.6);
@@ -137,25 +136,23 @@ body {
 }
 .btn.secondary:active {
   transform: translateY(0);
-  background-color: rgb(95.7568807339, 84.2660550459, 71.2431192661);
 }
 .btn.secondary:hover {
   background-color: rgba(125, 110, 93, 0.6);
 }
 .btn.inherit {
-  background-color: transparent;
+  background-color: #4A4A4A;
   color: transparent;
   border: 1px solid transparent;
 }
 .btn.inherit:hover {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgb(61.25, 61.25, 61.25);
   border-color: rgba(0, 0, 0, 0);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .btn.inherit:active {
   transform: translateY(0);
-  background-color: rgba(0, 0, 0, 0);
 }
 .btn.inherit {
   color: #333;
@@ -223,6 +220,16 @@ body {
   cursor: pointer;
 }
 
+.sideBarCart {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 999;
+  width: 40%;
+  background-color: rebeccapurple;
+}
+
 .headerWrap {
   width: 100%;
   height: 100px;
@@ -248,6 +255,70 @@ body {
 .headerWrap .logo .logo-image {
   width: 200px;
   height: 100px;
+}
+
+.selectProductWrap {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
+  background-color: #F8F7F5;
+  padding: 10px 20px;
+  width: 100%;
+  min-height: 80px;
+  margin-top: 10px;
+}
+.selectProductWrap dt, .selectProductWrap dd {
+  display: flex;
+}
+.selectProductWrap dt {
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.selectProductWrap dt .closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.selectProductWrap dt > div > span {
+  font-size: 1rem;
+  color: #666;
+}
+.selectProductWrap dt > div > span::after {
+  content: "|";
+  color: #666;
+  display: inline-block;
+  vertical-align: text-bottom;
+  padding: 0 5px;
+}
+.selectProductWrap dd {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+}
+.selectProductWrap dd .countBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.selectProductWrap dd .countBox div {
+  border: 1px solid #ccc;
+  background-color: #e4e4e7;
+  padding: 5px 2.5px;
+}
+.selectProductWrap dd .countBox div:nth-child(2) {
+  border-width: 0px;
+  background-color: transparent;
+}
+.selectProductWrap dd .price {
+  font-size: 1.35rem;
+  font-weight: 600;
 }
 
 .mainLayout > div {
@@ -389,10 +460,33 @@ body {
 .mainLayout .detail .leftContent > ul li {
   width: 80px;
   height: 100%;
-  background-color: rgb(196, 109, 109);
+  opacity: 0.7;
+  background-color: #F8F7F5;
+  position: relative;
+}
+.mainLayout .detail .leftContent > ul li::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.mainLayout .detail .leftContent > ul li:hover {
+  cursor: pointer;
+}
+.mainLayout .detail .leftContent > ul li.active {
+  outline: 3px solid #4A4A4A;
+  transform: translateY(-2px);
+}
+.mainLayout .detail .leftContent > ul li.active::after {
+  background-color: transparent;
 }
 .mainLayout .detail .rightContent hr {
   margin: 20px 10px;
+  opacity: 0.3;
 }
 .mainLayout .detail .rightContent > div > * {
   margin-top: 20px;
@@ -424,6 +518,11 @@ body {
   color: #ccc;
   text-decoration: line-through;
 }
+.mainLayout .detail .rightContent .originPrice.noSale {
+  font-size: 2rem;
+  color: #333;
+  text-decoration: none;
+}
 .mainLayout .detail .rightContent .salePrice {
   font-size: 2rem;
   font-weight: 500;
@@ -432,6 +531,13 @@ body {
 .mainLayout .detail .rightContent .salePrice span:last-child {
   margin-left: 15px;
   font-size: 1.7rem;
+}
+.mainLayout .detail .rightContent .totalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.15rem;
 }
 .mainLayout .detail .rightContent .buttonWrap button {
   font-size: 1.35rem;
@@ -448,69 +554,6 @@ body {
   border-radius: 5px;
   padding: 5px 10px;
   color: #fff;
-}
-.mainLayout .detail .selectProductWrap {
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
-  background-color: #eee;
-  padding: 10px 20px;
-  width: 100%;
-  min-height: 80px;
-  margin-top: 10px;
-}
-.mainLayout .detail .selectProductWrap dt, .mainLayout .detail .selectProductWrap dd {
-  display: flex;
-}
-.mainLayout .detail .selectProductWrap dt {
-  position: relative;
-  align-items: center;
-  gap: 10px;
-  height: 40px;
-  font-size: 1.35rem;
-  font-weight: 500;
-}
-.mainLayout .detail .selectProductWrap dt .closeBtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.mainLayout .detail .selectProductWrap dt > div > span {
-  font-size: 1rem;
-  color: #666;
-}
-.mainLayout .detail .selectProductWrap dt > div > span::after {
-  content: "|";
-  color: #666;
-  display: inline-block;
-  vertical-align: text-bottom;
-  padding: 0 5px;
-}
-.mainLayout .detail .selectProductWrap dd {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #ccc;
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: space-between;
-}
-.mainLayout .detail .selectProductWrap dd .countBox {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.mainLayout .detail .selectProductWrap dd .countBox div {
-  border: 1px solid #ccc;
-  background-color: #e4e4e7;
-  padding: 5px 2.5px;
-}
-.mainLayout .detail .selectProductWrap dd .countBox div:nth-child(2) {
-  border-width: 0px;
-  background-color: transparent;
-}
-.mainLayout .detail .selectProductWrap dd .price {
-  font-size: 1.75rem;
-  font-weight: 600;
 }
 
 footer {
