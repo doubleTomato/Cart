@@ -33,9 +33,40 @@
   }
 }
 
+// txt 버튼
+@mixin text-btn($color){
+  cursor: pointer; color: rgba($color, 0.6); @include animate-default(color); @include animate-default(font-weight);
+}
+// 아이콘 버튼
+@mixin icon-btn($color:$point_color, $size){
+    position: absolute;
+    top: 50%;
+    margin-top: -$size/2;
+    right: 0;
+    width: $size;
+    height: $size;
+    border-radius: $size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+        cursor: pointer;
+        color: #fff;
+        background-color: rgba($color, 0.3);
+        @include animate-default(background-color);
+    }
+}
+
+
 // box 기본 shadow
 @mixin box-shadow-default($bd-radius:5px){
     border-radius: $bd-radius;
     border: 1px solid #ccc;
     box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
 }
+
+// 기본 애니메이션
+@mixin animate-default($kind){
+  transition: $kind 0.2s ease, transform 0.2s ease;
+}
+

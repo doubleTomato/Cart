@@ -47,8 +47,8 @@ img, picture, video, canvas, svg {
 }
 
 img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: 100%;
   width: 100%;
 }

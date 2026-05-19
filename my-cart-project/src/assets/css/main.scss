@@ -6,7 +6,9 @@ body {
   color: #333;
 }
 // common
-
+hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
+// img
+.overflow-hidden.bg-gray-100{width: 100%; height: 100%;} 
 .btn {
   // 공통
   display: inline-flex;
@@ -48,6 +50,7 @@ body {
        color: #fff;
       }
     }
+  
 
   &.outline {
     &:hover {
@@ -58,9 +61,10 @@ body {
 
   &.sm { padding: 6px 16px; font-size: 13px; }
   &.lg { padding: 14px 32px; font-size: 16px; }
+  &.full{ width: 100%; padding: 14px 32px; font-size: 16px; }
 
   // Disabled
-  &:disabled {
+  &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
@@ -97,13 +101,39 @@ body {
 // 오른쪽에서 나오는 사이드 카트
 .sideBarCart{
   position: fixed;
-  right: 0;
+  right: -25%;
   bottom: 0;
-  top: 0;
+  top: 100px;
   z-index: 999;
-  width: 40%;
-  background-color: rebeccapurple;
-
+  width: 25%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: rgba(239, 239, 239, 0.9);
+  @include animate-default(right);
+  &.open{right: 0;}
+  .closeWrap{
+    height: 60px;
+    position: relative;
+    border-bottom: 1px solid rgba($point_color, 0.2);
+    .closeBtn{
+      font-size: 1.75rem;
+      @include icon-btn($main_color, 30px);
+    }
+  }
+  .deleteWrap{
+    display: flex; justify-content: flex-end;
+    color: $sub_txt_color;
+    align-items: center; height: 50px;
+    p{
+      svg{display: inline-block; vertical-align: middle; margin-top: -3px;}
+      &:hover{ @include text-btn($main_color);}
+    }
+  }
+  .selectProductWrap{ border-width: 0px;}
+  .showViewBtn{
+    display: flex; align-items:center;
+    position: absolute; bottom: 80px;
+  }
 }
 
 // header
@@ -113,8 +143,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 10%;
-  background-color: rgba(239, 239, 239, 0.9);
+  padding: 0px 15%;
+  background-color: rgb(239, 239, 239);
+  border-bottom: 1px solid rgba($point_color, 0.1);
   box-shadow: 3px 3px 3px #efefefaf;
   position: sticky;
   top: 0;
@@ -124,6 +155,7 @@ body {
       display: flex; gap: 6px; align-items: center;
       font-size: 1.25rem;
       i{ font-size: 1.25rem;}
+      &:hover{ @include text-btn($main_color)}
     }
   }
   .logo{
@@ -136,6 +168,7 @@ body {
 // == header end
 
 // 컴포넌트
+// 선택된 아이템
 .selectProductWrap{
       @include box-shadow-default;
       background-color: $sub_color;
@@ -148,13 +181,14 @@ body {
         position: relative;
         align-items: center;
         gap: 10px;
-        height: 40px;
-        font-size: 1.35rem;
+        min-height: 40px;
+        font-size: 1.15rem;
         font-weight: 500;
+        flex-wrap: wrap;
+        .tit{width: 100%; font-size: 1.35rem}
         .closeBtn{
-          position: absolute;
-          top: 0;
-          right: 0;
+          @include icon-btn($main_color, 30px);
+          top: 0; margin-top: 0;
         }
         & > div > span{ 
           font-size: 1rem; color: $sub_txt_color;
@@ -177,7 +211,7 @@ body {
           display: flex; align-items: center; gap: 5px;
           div{
             border: 1px solid #ccc; background-color: #e4e4e7;
-            padding: 5px 2.5px;
+            padding: 5px;
             &:nth-child(2){border-width: 0px; background-color: transparent;}
           }
          } //== countBox end
@@ -193,7 +227,7 @@ body {
 
 .mainLayout{
   & > div{
-    width: 1200px;
+    width: 1250px;
     margin: 0 auto;
     min-height: 100vh;
     min-height: calc(100dvh - 60px);
@@ -270,7 +304,7 @@ body {
   .detail{
     margin-top: 100px;
     display: flex;
-    gap: 5%;
+    justify-content: space-between;
     // 이미지 슬라이드
     & > div{ width: 45%;}
     .leftContent{
@@ -284,7 +318,7 @@ body {
               background-color: rgba(0, 0, 0, 0.7);
               position: absolute;
               top: 0; left: 0; right: 0; bottom: 0;
-              transition: background-color 0.2s ease, transform 0.2s ease;
+              @include animate-default(background-color);
             }
             &:hover{cursor: pointer;}
             &.active{
@@ -297,7 +331,7 @@ body {
     }
     // 상품정보
     .rightContent{
-       hr{margin: 20px 10px; opacity: 0.3;}
+
       & > div > * { margin-top: 20px;}
       h1{font-size: 1.5rem; font-weight: 400;}
       .saleType{ // saleType별 색상 지정 보류 중
@@ -349,4 +383,4 @@ body {
     
   }//==상세 끝
 }
-footer{width: 100%; height: 100px; background-color: $main_color; color: $sub_color; padding: 15px 20px; margin-top: 20px; box-sizing: border-box;  }
+footer{width: 100%; background-color: $main_color; color: $sub_color; padding: 15px 20px; margin-top: 20px; box-sizing: border-box;  }

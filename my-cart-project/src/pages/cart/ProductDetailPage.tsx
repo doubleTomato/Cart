@@ -56,6 +56,7 @@ export default function ProductDetailPage() {
     const addItem = useCartStore((state) => state.addItem);
 
     const handleAddToCart = () => {
+        if(selectedProducts.length === 0) return;
         selectedProducts.map((v) => (
             addItem(v)
         ));        
@@ -105,10 +106,11 @@ export default function ProductDetailPage() {
 
  // 사이즈 선택 시 작동
     const changeSelect = (selectedOption:SelectOption) => {
-       if(!filters.color){
-        alert("색상을 선택해주세요.");
-        return;
-       }
+        if(products === undefined) return;
+        if(!filters.color){
+            alert("색상을 선택해주세요.");
+            return;
+        }
         const curSize = selectedOption.value;
         const curColor = filters.color.value;
         const targetCombinationId = `${products?.id}-${curColor}-${curSize}`;
@@ -127,7 +129,7 @@ export default function ProductDetailPage() {
         const newItem = {
             id: targetCombinationId,
             title: products?.title,
-            productId: products?.id,
+            productId: products?.id as number,
             color: String(curColor),
             size: String(curSize),
             price: discountedPrice,
@@ -157,7 +159,7 @@ export default function ProductDetailPage() {
     return( 
         <div className="detail">
             <div className='leftContent'>
-               <div><Image src={mainImg} alt={mainImg || ''}/></div>
+               <Image src={mainImg} alt={mainImg || ''}/>
                <ul>
                     {imgList.map((x,i) =>(
                         <li className={mainImg === x ? "active" : ''} key={"images-"+i} onClick={() => setMainImg(x)}>
@@ -168,8 +170,8 @@ export default function ProductDetailPage() {
             </div>
             <div className='rightContent'>
                 <div className='productInfo'>
-                    <h1>{products?.title}</h1>
-                    {products?.discountPolicy && <p className='saleType'>{products?.discountPolicy && sales?.[products?.discountPolicy].label}</p>}
+                    <h1>{products?.discountPolicy && <p className='saleType'>{products?.discountPolicy && sales?.[products?.discountPolicy].label}</p>} {products?.title}</h1>
+                    
                     <p className='desc'>{products?.desc}</p>
                     <div className='ratingWrap'></div>
                     <p>
@@ -202,6 +204,7 @@ export default function ProductDetailPage() {
                             id={p.id}
                             color={p.color}
                             size={p.size}
+                            productId={p.productId}
                             price={discountedPrice}
                             quantity={p.quantity}
                             onIncrease={handleIncrease}
@@ -217,7 +220,7 @@ export default function ProductDetailPage() {
                    </div>
                     <div className='buttonWrap'>
                         <button className='btn primary lg'>바로구매</button>
-                        <button className='btn secondary lg' onClick={handleAddToCart}>장바구니 추가</button>
+                        <button className={`btn secondary lg ${selectedProducts.length === 0 && 'disabled'}`} onClick={handleAddToCart}>장바구니 추가</button>
                     </div>
                 </div>
                 <hr/>

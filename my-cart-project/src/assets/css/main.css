@@ -47,8 +47,8 @@ img, picture, video, canvas, svg {
 }
 
 img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: 100%;
   width: 100%;
 }
@@ -85,6 +85,17 @@ body {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   color: #333;
+}
+
+hr {
+  margin: 20px 10px;
+  opacity: 0.3;
+  width: 100%;
+}
+
+.overflow-hidden.bg-gray-100 {
+  width: 100%;
+  height: 100%;
 }
 
 .btn {
@@ -173,7 +184,12 @@ body {
   padding: 14px 32px;
   font-size: 16px;
 }
-.btn:disabled {
+.btn.full {
+  width: 100%;
+  padding: 14px 32px;
+  font-size: 16px;
+}
+.btn.disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
@@ -222,12 +238,69 @@ body {
 
 .sideBarCart {
   position: fixed;
-  right: 0;
+  right: -25%;
   bottom: 0;
-  top: 0;
+  top: 100px;
   z-index: 999;
-  width: 40%;
-  background-color: rebeccapurple;
+  width: 25%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: rgba(239, 239, 239, 0.9);
+  transition: right 0.2s ease, transform 0.2s ease;
+}
+.sideBarCart.open {
+  right: 0;
+}
+.sideBarCart .closeWrap {
+  height: 60px;
+  position: relative;
+  border-bottom: 1px solid rgba(125, 110, 93, 0.2);
+}
+.sideBarCart .closeWrap .closeBtn {
+  font-size: 1.75rem;
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sideBarCart .closeWrap .closeBtn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: rgba(74, 74, 74, 0.3);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.sideBarCart .deleteWrap {
+  display: flex;
+  justify-content: flex-end;
+  color: #666;
+  align-items: center;
+  height: 50px;
+}
+.sideBarCart .deleteWrap p svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+.sideBarCart .deleteWrap p:hover {
+  cursor: pointer;
+  color: rgba(74, 74, 74, 0.6);
+  transition: color 0.2s ease, transform 0.2s ease;
+  transition: font-weight 0.2s ease, transform 0.2s ease;
+}
+.sideBarCart .selectProductWrap {
+  border-width: 0px;
+}
+.sideBarCart .showViewBtn {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 80px;
 }
 
 .headerWrap {
@@ -236,8 +309,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 10%;
-  background-color: rgba(239, 239, 239, 0.9);
+  padding: 0px 15%;
+  background-color: rgb(239, 239, 239);
+  border-bottom: 1px solid rgba(125, 110, 93, 0.1);
   box-shadow: 3px 3px 3px rgba(239, 239, 239, 0.6862745098);
   position: sticky;
   top: 0;
@@ -251,6 +325,12 @@ body {
 }
 .headerWrap .rightContent li i {
   font-size: 1.25rem;
+}
+.headerWrap .rightContent li:hover {
+  cursor: pointer;
+  color: rgba(74, 74, 74, 0.6);
+  transition: color 0.2s ease, transform 0.2s ease;
+  transition: font-weight 0.2s ease, transform 0.2s ease;
 }
 .headerWrap .logo .logo-image {
   width: 200px;
@@ -274,14 +354,36 @@ body {
   position: relative;
   align-items: center;
   gap: 10px;
-  height: 40px;
-  font-size: 1.35rem;
+  min-height: 40px;
+  font-size: 1.15rem;
   font-weight: 500;
+  flex-wrap: wrap;
+}
+.selectProductWrap dt .tit {
+  width: 100%;
+  font-size: 1.35rem;
 }
 .selectProductWrap dt .closeBtn {
   position: absolute;
-  top: 0;
+  top: 50%;
+  margin-top: -15px;
   right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.selectProductWrap dt .closeBtn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: rgba(74, 74, 74, 0.3);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.selectProductWrap dt .closeBtn {
+  top: 0;
+  margin-top: 0;
 }
 .selectProductWrap dt > div > span {
   font-size: 1rem;
@@ -310,7 +412,7 @@ body {
 .selectProductWrap dd .countBox div {
   border: 1px solid #ccc;
   background-color: #e4e4e7;
-  padding: 5px 2.5px;
+  padding: 5px;
 }
 .selectProductWrap dd .countBox div:nth-child(2) {
   border-width: 0px;
@@ -322,7 +424,7 @@ body {
 }
 
 .mainLayout > div {
-  width: 1200px;
+  width: 1250px;
   margin: 0 auto;
   min-height: 100vh;
   min-height: calc(100dvh - 60px);
@@ -440,7 +542,7 @@ body {
 .mainLayout .detail {
   margin-top: 100px;
   display: flex;
-  gap: 5%;
+  justify-content: space-between;
 }
 .mainLayout .detail > div {
   width: 45%;
@@ -483,10 +585,6 @@ body {
 }
 .mainLayout .detail .leftContent > ul li.active::after {
   background-color: transparent;
-}
-.mainLayout .detail .rightContent hr {
-  margin: 20px 10px;
-  opacity: 0.3;
 }
 .mainLayout .detail .rightContent > div > * {
   margin-top: 20px;
@@ -558,7 +656,6 @@ body {
 
 footer {
   width: 100%;
-  height: 100px;
   background-color: #4A4A4A;
   color: #F8F7F5;
   padding: 15px 20px;

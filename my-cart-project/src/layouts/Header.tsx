@@ -2,21 +2,31 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Image } from "@/components/common/Image";
 import { useCartStore } from "../stores/useCartStore";
 import { Link } from "react-router-dom";
-export const Header = () => {
-    const items = useCartStore((state) => state.items);
+import { useShallow } from "zustand/shallow";
+
+interface HeaderProps {
+  onToggle: () => void;
+}
+
+export const Header = ({onToggle}:HeaderProps) => {
+      const { items } = useCartStore(
+            useShallow((state) => ({
+                items: state.items
+            }))
+        );
     const itemCount = items.length;
     return (
         <header className="headerWrap">
             <div className="logo">
                 <Link to="/">
                     <Image 
-                    src="/mogumogu-logo.png" 
+                    src="/images/mogumogu-logo.png" 
                     alt="서비스 로고" 
                     classN="logo-image"/>
                 </Link>
             </div>
             <ul className="rightContent">
-                <li>
+                <li onClick={onToggle}>
                     <CiShoppingCart size="1.5rem"/>
                     <span>장바구니</span>
                     <div className="badge notice">{itemCount}</div>

@@ -12,7 +12,7 @@ export const Image = ({ src, alt, classN = "" }: ImageProps) => {
         <div className={`overflow-hidden bg-gray-100 ${classN}`}>
             <img
               // 에러 시 기본이미지 출력
-              src={isError || !src ?  defaultImage : "/images/" + src}
+              src={isError || !src ?  defaultImage : src}
               className={`default-image ${classN}`}
               alt={`${alt}`}
               // 이미지 로드 실패 시 true로 변경

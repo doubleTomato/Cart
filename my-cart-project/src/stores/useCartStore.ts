@@ -5,20 +5,22 @@ import { persist } from 'zustand/middleware';
 interface Product {
   id: string;
   productId: number;
-  name: string;
   price: number;
   imageUrl?: string;
 }
 
 interface CartItem extends Product {
+  title?: string | undefined;
   quantity: number;
+  color: string;
+  size: string;
 }
 
 interface CartState{
     items: CartItem[];
-    addItem: (product: Product) => void;
-    updateQuantity: (id: number, type: 'plus' | 'minus') => void;
-    removeItem: (id: number) => void;
+    addItem: (product: CartItem) => void;
+    updateQuantity: (id: string, type: 'plus' | 'minus') => void;
+    removeItem: (id: string) => void;
     clearCart: () => void;
     getTotalStatus: () => { totalQty: number; totalPrice: number}
 }
@@ -30,7 +32,6 @@ export const useCartStore = create<CartState>()(
             addItem: (product) => {
                 const {items} = get();
                 const isExist = items.find((item) => item.id === product.id);
-                console.log(items);
                 if(isExist){
                     set({
                         items: items.map((item) => 
@@ -40,7 +41,7 @@ export const useCartStore = create<CartState>()(
                         ),
                     });
                 }else{
-                    set({items: [...items, {...product, quantity: product.quantity}]});
+                    set({items: [...items, {...product, color: product.color, size: product.size, quantity: product.quantity}]});
                 }
             },
 

@@ -17,10 +17,10 @@ export const SelectedItemCard = ({
     return (
         <dl className="selectProductWrap">
             <dt>
-                {variant !== 'detail' && <div>{title}</div>}
+                {variant !== 'detail' && <div className="tit">{title}</div>}
                 <div className="color"><span>색상</span> {color}</div>
                 <div className="size"><span>사이즈</span> {size}</div>
-                <button className="closeBtn" onClick={() => onRemove(id)}><MdOutlineClose/></button>
+                <button className="closeBtn " onClick={() => onRemove(id)}><MdOutlineClose/></button>
             </dt>
             <dd>
                 <div className="countBox">
