@@ -9,6 +9,9 @@ import { CustomSelect } from '@/components/common/CustomSelect';
 import type { SelectOption } from '@/shared/types/select';
 import type { SelectedItemData } from '@/shared/types/selectedProduct';
 import { SelectedItemCard } from '@/components/product/SelectProduct';
+
+import type { PopupProps } from '@/shared/types/popup';
+import { BasePopup } from '@/components/common/popup/BasePopup';
 import { Image } from '@/components/common/Image';
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
@@ -27,8 +30,10 @@ export default function ProductDetailPage() {
     // 선택한 아이템
     const [selectedProducts, setSelectedProducts] = useState<SelectedItemData[]>([]);
 
+    // popup 제어
+    type PopupConfig = Omit<PopupProps, 'onClose'>;
+    const [popupConfig, setPopupConfig] = useState<PopupConfig| null>(null);
 
-    // total 가격 및 값
 
     useEffect(() => {
         if (!id) return;
@@ -60,11 +65,14 @@ export default function ProductDetailPage() {
         selectedProducts.map((v) => (
             addItem(v)
         ));        
-        alert("장바구니에 담겼습니다!");
-
+        // alert("장바구니에 담겼습니다!");
+         setPopupConfig({
+            type:"alert", state:"success", 
+            title:"성공", content:"장바구니에 담겼습니다!"
+        });
     };
 
-
+    // total 가격 및 값
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
     if (isLoading) return <div>로딩 중...</div>;
     const {material, thickness, flexibility} = products?.detail?.specs || {};
@@ -78,6 +86,8 @@ export default function ProductDetailPage() {
         value: size
     }));
     
+
+
    // 수량 증가
   const handleIncrease = (id: string | number) => {
     setSelectedProducts((prev) =>
@@ -108,7 +118,10 @@ export default function ProductDetailPage() {
     const changeSelect = (selectedOption:SelectOption) => {
         if(products === undefined) return;
         if(!filters.color){
-            alert("색상을 선택해주세요.");
+            setPopupConfig({
+                type:"alert", state:"error", 
+                title:"확인 필요", content:"색상을 선택해주세요."
+            });
             return;
         }
         const curSize = selectedOption.value;
@@ -234,6 +247,14 @@ export default function ProductDetailPage() {
                     </ul>
                 </div>
             </div>
+            {popupConfig && <BasePopup
+                type={popupConfig.type}
+                state={popupConfig.state}
+                title={popupConfig.title}
+                content={popupConfig.content}
+                onConfirm={popupConfig.onConfirm}
+                onClose={() => setPopupConfig(null)} // [닫기] 혹은 [취소] 시 null로 초기화
+            />}
         </div>
     )
 }

@@ -236,6 +236,97 @@ hr {
   cursor: pointer;
 }
 
+.popupBg {
+  width: 100% !important;
+  height: 100%;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease;
+}
+.popupBg.fade-in {
+  opacity: 1;
+}
+.popupBg.fade-out {
+  opacity: 0;
+}
+.popupBg .popupWrap {
+  position: absolute;
+  min-width: 400px;
+  min-height: 150px;
+  margin-left: -200px;
+  margin-top: -75px;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
+}
+.popupBg .popupWrap .popupHead {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  position: relative;
+}
+.popupBg .popupWrap .popupHead.success span {
+  color: rgb(116, 176, 60);
+}
+.popupBg .popupWrap .popupHead.error span {
+  color: rgb(176, 60, 60);
+}
+.popupBg .popupWrap .popupHead.confirm span {
+  color: #333;
+}
+.popupBg .popupWrap .popupHead h1, .popupBg .popupWrap .popupHead svg {
+  font-size: 1.5rem;
+}
+.popupBg .popupWrap .popupContent {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(74, 74, 74, 0.6);
+}
+.popupBg .popupWrap .popupButtons {
+  margin-top: 20px;
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.popupBg .popupWrap.alert {
+  width: 200px;
+}
+.popupBg .popupWrap .closeBtn {
+  position: absolute;
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popupBg .popupWrap .closeBtn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: rgba(74, 74, 74, 0.3);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.popupBg .popupWrap .closeBtn svg {
+  font-size: 1.5rem;
+}
+
 .sideBarCart {
   position: fixed;
   right: -25%;
@@ -569,6 +660,7 @@ hr {
 .mainLayout .detail .leftContent > ul li::after {
   content: "";
   background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
   position: absolute;
   top: 0;
   left: 0;
@@ -580,11 +672,12 @@ hr {
   cursor: pointer;
 }
 .mainLayout .detail .leftContent > ul li.active {
-  outline: 3px solid #4A4A4A;
+  outline: 3px solid #7D6E5D;
   transform: translateY(-2px);
 }
 .mainLayout .detail .leftContent > ul li.active::after {
   background-color: transparent;
+  backdrop-filter: blur(0px);
 }
 .mainLayout .detail .rightContent > div > * {
   margin-top: 20px;

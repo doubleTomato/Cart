@@ -98,6 +98,59 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
      }
   }
 
+  // 팝업
+  .popupBg{
+    width: 100% !important;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+    &.fade-in { opacity: 1; }
+    &.fade-out { opacity: 0; }
+    .popupWrap{
+      position: absolute;
+      min-width: 400px;
+      min-height: 150px;
+      margin-left: -200px;
+      margin-top: -75px;
+      top: 50%; left: 50%;
+      background-color: #fff;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      @include box-shadow-default;
+      .popupHead{
+        display: flex; gap: 5px; align-items: center;
+        position: relative;
+        &.success{span{ color: $success_color }}
+        &.error{span{ color: $error_color }}
+        &.confirm{span{ color: $default_txt_color }}
+        h1, svg{ font-size: 1.5rem;}
+
+      }
+      .popupContent{
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-top: 10px;
+        padding-top: 15px;
+        border-top: 1px solid rgba($main_color, 0.6);
+      }
+      .popupButtons{
+        margin-top: 20px;
+        display: flex; gap: 5px;
+        justify-content: flex-end;
+      }
+      &.alert{width: 200px;}
+      .closeBtn{
+        position: absolute;
+        @include icon-btn($main_color, 30px);
+        svg{font-size: 1.5rem;}
+      }
+    }
+  }
+
 // 오른쪽에서 나오는 사이드 카트
 .sideBarCart{
   position: fixed;
@@ -316,15 +369,16 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
             &::after{
               content: "";
               background-color: rgba(0, 0, 0, 0.7);
+              backdrop-filter: blur(2px);
               position: absolute;
               top: 0; left: 0; right: 0; bottom: 0;
               @include animate-default(background-color);
             }
             &:hover{cursor: pointer;}
             &.active{
-              outline: 3px solid $main_color;
+              outline: 3px solid $point_color;
               transform: translateY(-2px);
-              &::after{background-color: transparent;}
+              &::after{background-color: transparent; backdrop-filter: blur(0px);}
             }
           }
       }

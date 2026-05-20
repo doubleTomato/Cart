@@ -9,7 +9,6 @@ interface ProductProps {
 
 export const CardItem = ( { product } : ProductProps ) => {
     const {id, imgUrl, saleType, title, desc, price} = product;
-    console.log(saleType);
     return (
         <div className="cardItem" data-id={id}>
             <Link to={'/detail/' + id}>
