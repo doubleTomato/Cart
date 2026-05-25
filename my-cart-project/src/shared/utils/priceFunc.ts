@@ -8,12 +8,13 @@ export const getDiscountedPrice = (
   if (!product) return 0;
   
   // 정책이 x | sales x | sales에 key x => 정가 반환
-  const policyKey = product.discountPolicy;
+  const policyKey = product.saleType;
+
   if (!policyKey || !sales || !sales[policyKey]) {
-    return product.price;
+    return product.basePrice;
   }
 
   // 할인율 계산
   const rate = sales[policyKey].rate;
-  return product.price * (1 - rate / 100);
+  return product.basePrice * (1 - rate / 100);
 };

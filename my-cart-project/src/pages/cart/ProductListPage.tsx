@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 
 import { Image } from '@/components/common/Image';
 import { MAIN_TABS } from '@/constants/tabNav'; // 정의된 탭 가져오기
-import { CLOTHING_PRODUCTS } from '@/constants/listProduct'; // 상품 데이터 가져오기
+import { PRODUCTS } from '@/constants/products';
 import { CardItem } from '@/components/cart/CartItem';
 
 const banners = [
@@ -62,7 +62,7 @@ export default function ProductListPage() {
                 {/* 무한 스크롤 */}
                 <div className="listWrap">
                     {
-                    CLOTHING_PRODUCTS.map((x) => (
+                    PRODUCTS.map((x) => (
                         <CardItem key={x.id} product={x}/>
                     ))
                     }

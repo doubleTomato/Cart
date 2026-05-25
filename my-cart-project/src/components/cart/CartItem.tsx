@@ -12,7 +12,7 @@ interface ProductProps {
 }
 
 export const CardItem = ( { product } : ProductProps ) => {
-    console.log(product);
+    // console.log(product);
     const {id, detail, saleType, title, basePrice} = product;
     const { description, contentImages } = detail;
     const [sales, setSales] = useState<Record<string, DiscountPolicyValue>>({});
@@ -30,7 +30,7 @@ export const CardItem = ( { product } : ProductProps ) => {
             });
         }, [id]);
     const discountedPrice = getDiscountedPrice(product, sales ? sales : {});
-    console.log(basePrice);
+    
     return (
         <div className="cardItem" data-id={id}>
             <Link to={'/detail/' + id}>
@@ -45,9 +45,9 @@ export const CardItem = ( { product } : ProductProps ) => {
                     <p className="tit">{title}</p>
                     <p className="desc">{description}</p>
                     <div className="priceBox">
-                        {saleType && <span className={`discountRate ${saleType.toLowerCase()}`}>{saleType}</span>}
-                        <span className={product?.discountPolicy ? 'originPrice':'price'}>{basePrice.toLocaleString() ?? 0}원</span>
-                        {product?.discountPolicy && <p className="price">{discountedPrice.toLocaleString()}원</p>}
+                        {saleType !== 'NORMAL' && <span className={`discountRate ${saleType.toLowerCase()}`}>{saleType}</span>}
+                        <span className={saleType !== 'NORMAL' ? 'originPrice' : 'price'}>{basePrice.toLocaleString() ?? 0}원</span>
+                        {saleType !== 'NORMAL' && <p className="price">{discountedPrice.toLocaleString()}원</p>}
                     </div>
                 </div>
             </Link>

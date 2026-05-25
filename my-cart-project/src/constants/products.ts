@@ -3,71 +3,18 @@ import type { Product } from "@/shared/types/product";
 export const PRODUCTS: Product[] = [
   {
     id: 101,
-    title: "오버핏 헤비 코튼 반팔 티셔츠",
-    basePrice: 29000,
+    title: "베이직 무지 반팔 티셔츠",
+    basePrice: 15000,
     thumbnail: "/images/products/tee-01.jpg",
-    shortDescription: "탄탄한 10수 코튼 원단으로 제작된 데일리 티셔츠",
-    saleType: "NEW",
-    shippingPolicyId: "default",
-    maxPurchaseQuantity: 5,
-    detail: {
-      description: "고중량 10수 싱글 원단을 사용하여 세탁 후에도 목 늘어남이나 변형이 적습니다.",
-      images: ["/images/products/tee-01-1.jpg", "/images/products/tee-01-2.jpg"],
-      contentImages: ["/images/products/detail-desc-01.jpg"],
-      info: "여유로운 세미 오버핏으로 제작되었습니다.",
-      specs: {
-        material: "Cotton 100%",
-        thickness: "THICK",
-        flexibility: true
-      }
-    },
-    variants: [
-      { id: "101-white-s", color: "White", size: "S", stock: 10, additionalPrice: 0, isActive: true },
-      { id: "101-white-m", color: "White", size: "M", stock: 3, additionalPrice: 0, isActive: true },
-      { id: "101-black-xl", color: "Black", size: "XL", stock: 0, additionalPrice: 2000, isActive: false }
-    ]
-  },
-  {
-    id: 102,
-    title: "와이드 리지드 데님 팬츠",
-    basePrice: 58000,
-    thumbnail: "/images/products/denim-01.jpg",
-    shortDescription: "클래식한 생지 데님 본연의 멋을 살린 와이드 팬츠",
-    saleType: "BEST",
-    shippingPolicyId: "default",
-    maxPurchaseQuantity: 3,
-    detail: {
-      description: "정통 리지드 데님 원단을 사용하여 입을수록 사용자의 체형에 맞게 워싱이 진행됩니다.",
-      images: ["/images/products/denim-01-1.jpg"],
-      contentImages: ["/images/products/denim-detail.jpg"],
-      info: "이염 방지를 위해 첫 세탁은 드라이클리닝을 권장합니다.",
-      specs: {
-        material: "Denim 100%",
-        thickness: "THICK",
-        flexibility: false
-      }
-    },
-    variants: [
-      { id: "102-indigo-28", color: "Indigo", size: "28", stock: 5, additionalPrice: 0, isActive: true },
-      { id: "102-indigo-30", color: "Indigo", size: "30", stock: 12, additionalPrice: 0, isActive: true },
-      { id: "102-indigo-32", color: "Indigo", size: "32", stock: 0, additionalPrice: 0, isActive: true },
-      { id: "102-indigo-34", color: "Indigo", size: "34", stock: 2, additionalPrice: 3000, isActive: true }
-    ]
-  },
-  {
-    id: 103,
-    title: "데일리 옥스포드 셔츠",
-    basePrice: 45000,
-    thumbnail: "/images/products/shirt-01.jpg",
-    shortDescription: "사계절 내내 활용하기 좋은 스탠다드 핏 셔츠",
+    shortDescription: "매일 입기 좋은 깔끔한 핏의 기본 반팔 티셔츠",
     saleType: "NORMAL",
     shippingPolicyId: "default",
     maxPurchaseQuantity: 10,
     detail: {
-      description: "부드러운 옥스포드 코튼 소재로 제작되어 캐주얼과 포멀함을 동시에 잡았습니다.",
-      images: ["/images/products/shirt-01-1.jpg"],
-      contentImages: ["/images/products/shirt-detail.jpg"],
-      info: "자연스러운 구김이 멋스러운 셔츠입니다.",
+      description: "탄탄한 코튼 원단으로 제작되어 세탁 후에도 변형이 적습니다.",
+      images: ["/images/products/tee-01-1.jpg"],
+      contentImages: ["/images/products/tee-size-info.jpg"],
+      info: "단독 찬물 세탁을 권장합니다.",
       specs: {
         material: "Cotton 100%",
         thickness: "NORMAL",
@@ -75,51 +22,165 @@ export const PRODUCTS: Product[] = [
       }
     },
     variants: [
-      { id: "103-white-m", color: "White", size: "M", stock: 20, additionalPrice: 0, isActive: true },
-      { id: "103-white-l", color: "White", size: "L", stock: 15, additionalPrice: 0, isActive: true },
-      { id: "103-skyblue-m", color: "Sky Blue", size: "M", stock: 8, additionalPrice: 0, isActive: true }
+      { id: "101-bk-s", color: "Black", size: "S", stock: 12, additionalPrice: 0, isActive: true },
+      { id: "101-bk-m", color: "Black", size: "M", stock: 25, additionalPrice: 0, isActive: true },
+      { id: "101-bk-l", color: "Black", size: "L", stock: 0, additionalPrice: 0, isActive: true },
+      { id: "101-wt-s", color: "White", size: "S", stock: 18, additionalPrice: 0, isActive: true },
+      { id: "101-wt-m", color: "White", size: "M", stock: 30, additionalPrice: 0, isActive: true },
+      { id: "101-wt-l", color: "White", size: "L", stock: 15, additionalPrice: 0, isActive: true }
     ]
   },
   {
-    id: 104,
-    title: "린넨 혼방 슬림 슬랙스",
+    id: 102,
+    title: "와이드 데님 팬츠",
     basePrice: 39000,
-    thumbnail: "/images/products/slacks-01.jpg",
-    shortDescription: "여름철 시원하게 착용 가능한 린넨 슬랙스",
+    thumbnail: "/images/products/denim-01.jpg",
+    shortDescription: "자연스러운 워싱과 트렌디한 와이드 핏 청바지",
+    saleType: "NEW",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 5,
+    detail: {
+      description: "사계절 착용하기 좋은 두께감의 데님 원단입니다.",
+      images: ["/images/products/denim-01-1.jpg"],
+      contentImages: ["/images/products/denim-size.jpg"],
+      info: "이염 방지를 위해 첫 세탁은 드라이클리닝을 권장합니다.",
+      specs: {
+        material: "Cotton 100%",
+        thickness: "NORMAL",
+        flexibility: false
+      }
+    },
+    variants: [
+      { id: "102-lb-28", color: "Light Blue", size: "28", stock: 7, additionalPrice: 0, isActive: true },
+      { id: "102-lb-30", color: "Light Blue", size: "30", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "102-lb-32", color: "Light Blue", size: "32", stock: 5, additionalPrice: 0, isActive: true },
+      { id: "102-db-28", color: "Deep Blue", size: "28", stock: 9, additionalPrice: 0, isActive: true },
+      { id: "102-db-30", color: "Deep Blue", size: "30", stock: 22, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 103,
+    title: "오버핏 옥스포드 셔츠",
+    basePrice: 32000,
+    thumbnail: "/images/products/shirt-03.jpg",
+    shortDescription: "캐주얼하고 클래식하게 연출 가능한 오버핏 셔츠",
     saleType: "SALE",
     shippingPolicyId: "default",
     maxPurchaseQuantity: 5,
     detail: {
-      description: "린넨과 폴리 혼방 소재로 구김 문제를 최소화했습니다.",
-      images: ["/images/products/slacks-01-1.jpg"],
-      contentImages: ["/images/products/slacks-info.jpg"],
-      info: "슬림하게 떨어지는 핏이 다리를 길어 보이게 합니다.",
+      description: "부드럽고 촘촘한 옥스포드 조직감으로 구김이 덜합니다.",
+      images: ["/images/products/shirt-03-1.jpg"],
+      contentImages: ["/images/products/shirt-detail.jpg"],
+      info: "드라이클리닝 또는 찬물 단독 손세탁하십시오.",
       specs: {
-        material: "Linen 50%, Poly 50%",
+        material: "Cotton 100%",
+        thickness: "NORMAL",
+        flexibility: false
+      }
+    },
+    variants: [
+      { id: "103-bl-m", color: "Blue", size: "M", stock: 11, additionalPrice: 0, isActive: true },
+      { id: "103-bl-l", color: "Blue", size: "L", stock: 16, additionalPrice: 0, isActive: true },
+      { id: "103-wt-m", color: "White", size: "M", stock: 4, additionalPrice: 0, isActive: true },
+      { id: "103-wt-l", color: "White", size: "L", stock: 9, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 104,
+    title: "린넨 블렌드 슬랙스",
+    basePrice: 45000,
+    thumbnail: "/images/products/slacks-05.jpg",
+    shortDescription: "여름철 시원하게 입을 수 있는 린넨 슬랙스",
+    saleType: "NORMAL",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 4,
+    detail: {
+      description: "린넨과 혼방 소재로 특유의 까슬거림을 줄이고 통기성을 높였습니다.",
+      images: ["/images/products/slacks-05-1.jpg"],
+      contentImages: ["/images/products/slacks-fabric.jpg"],
+      info: "원단 특성상 뭉침 현상이나 잡사가 섞여 있을 수 있습니다.",
+      specs: {
+        material: "Linen 30%, Polyester 65%, Span 5%",
         thickness: "THIN",
         flexibility: true
       }
     },
     variants: [
-      { id: "104-black-s", color: "Black", size: "S", stock: 7, additionalPrice: 0, isActive: true },
-      { id: "104-black-m", color: "Black", size: "M", stock: 0, additionalPrice: 0, isActive: true },
-      { id: "104-beige-m", color: "Beige", size: "M", stock: 3, additionalPrice: 0, isActive: true }
+      { id: "104-bk-s", color: "Black", size: "S", stock: 15, additionalPrice: 0, isActive: true },
+      { id: "104-bk-m", color: "Black", size: "M", stock: 19, additionalPrice: 0, isActive: true },
+      { id: "104-bg-s", color: "Beige", size: "S", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "104-bg-m", color: "Beige", size: "M", stock: 14, additionalPrice: 0, isActive: true }
     ]
   },
   {
     id: 105,
-    title: "나일론 포켓 카고 팬츠",
-    basePrice: 49000,
-    thumbnail: "/images/products/cargo-01.jpg",
-    shortDescription: "가벼운 나일론 소재의 트렌디한 카고 팬츠",
-    saleType: "NEW",
-    shippingPolicyId: "free_shipping",
+    title: "데일리 스니커즈",
+    basePrice: 59000,
+    thumbnail: "/images/products/shoes-01.jpg",
+    shortDescription: "어디에나 매치하기 좋은 미니멀한 스니커즈",
+    saleType: "BEST",
+    shippingPolicyId: "free",
+    maxPurchaseQuantity: 2,
+    detail: {
+      description: "유행을 타지 않는 베이직한 디자인과 편안한 쿠션감이 특징입니다.",
+      images: ["/images/products/shoes-01-1.jpg"],
+      contentImages: ["/images/products/shoes-view.jpg"],
+      info: "물세탁은 피해주시고 오염 시 가죽 전용 클리너를 사용하세요.",
+      specs: {
+        material: "Synthetic Leather",
+        thickness: "NORMAL",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "105-wt-230", color: "White", size: "230", stock: 5, additionalPrice: 0, isActive: true },
+      { id: "105-wt-240", color: "White", size: "240", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "105-wt-250", color: "White", size: "250", stock: 12, additionalPrice: 0, isActive: true },
+      { id: "105-bk-260", color: "Black", size: "260", stock: 4, additionalPrice: 0, isActive: true },
+      { id: "105-bk-270", color: "Black", size: "270", stock: 6, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 106,
+    title: "헤비웨이트 후드 집업",
+    basePrice: 68000,
+    thumbnail: "/images/products/hood-02.jpg",
+    shortDescription: "고중량 원단으로 각이 잘 잡히는 후드 집업",
+    saleType: "NORMAL",
+    shippingPolicyId: "free",
     maxPurchaseQuantity: 3,
     detail: {
-      description: "바스락거리는 질감의 나일론 소재로 고프코어 룩 연출에 제격입니다.",
+      description: "안감 루프 형태로 제작되어 봄 가을철 쾌적한 착용감을 선사합니다.",
+      images: ["/images/products/hood-02-1.jpg"],
+      contentImages: ["/images/products/hood-detail.jpg"],
+      info: "지퍼를 잠근 후 뒤집어 세탁망에 넣어 세탁하세요.",
+      specs: {
+        material: "Cotton 100%",
+        thickness: "THICK",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "106-gy-m", color: "Gray", size: "M", stock: 20, additionalPrice: 0, isActive: true },
+      { id: "106-gy-l", color: "Gray", size: "L", stock: 18, additionalPrice: 0, isActive: true },
+      { id: "106-bk-m", color: "Black", size: "M", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "106-bk-l", color: "Black", size: "L", stock: 25, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 107,
+    title: "카고 나일론 조거팬츠",
+    basePrice: 42000,
+    thumbnail: "/images/products/cargo-01.jpg",
+    shortDescription: "바스락거리는 나일론 소재의 트렌디 카고 팬츠",
+    saleType: "NEW",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 5,
+    detail: {
+      description: "가볍고 시원한 나일론 소재로 아웃도어 및 데일리 룩에 적합합니다.",
       images: ["/images/products/cargo-01-1.jpg"],
-      contentImages: ["/images/products/cargo-detail.jpg"],
-      info: "전 상품 무료배송 이벤트 적용 상품입니다.",
+      contentImages: ["/images/products/cargo-pocket.jpg"],
+      info: "원단 특성상 고온 기계 건조는 수축을 유발할 수 있습니다.",
       specs: {
         material: "Nylon 100%",
         thickness: "THIN",
@@ -127,85 +188,35 @@ export const PRODUCTS: Product[] = [
       }
     },
     variants: [
-      { id: "105-khaki-m", color: "Khaki", size: "M", stock: 25, additionalPrice: 0, isActive: true },
-      { id: "105-khaki-l", color: "Khaki", size: "L", stock: 18, additionalPrice: 0, isActive: true },
-      { id: "105-black-m", color: "Black", size: "M", stock: 0, additionalPrice: 0, isActive: false }
-    ]
-  },
-  {
-    id: 106,
-    title: "피그먼트 다잉 맨투맨",
-    basePrice: 42000,
-    thumbnail: "/images/products/sweat-01.jpg",
-    shortDescription: "빈티지한 색감이 매력적인 오버핏 맨투맨",
-    saleType: "NORMAL",
-    shippingPolicyId: "default",
-    maxPurchaseQuantity: 5,
-    detail: {
-      description: "피그먼트 워싱 공법을 통해 자연스러운 물 빠짐을 구현했습니다.",
-      images: ["/images/products/sweat-01-1.jpg"],
-      contentImages: ["/images/products/sweat-detail.jpg"],
-      info: "테리 소재 안감으로 사계절 착용 가능합니다.",
-      specs: {
-        material: "Cotton 100%",
-        thickness: "NORMAL",
-        flexibility: true
-      }
-    },
-    variants: [
-      { id: "106-charcoal-free", color: "Charcoal", size: "Free", stock: 30, additionalPrice: 0, isActive: true },
-      { id: "106-brick-free", color: "Brick", size: "Free", stock: 12, additionalPrice: 0, isActive: true }
-    ]
-  },
-  {
-    id: 107,
-    title: "프리미엄 울 캐시미어 코트",
-    basePrice: 259000,
-    thumbnail: "/images/products/coat-02.jpg",
-    shortDescription: "핸드메이드 공법으로 제작된 캐시미어 혼방 코트",
-    saleType: "BEST",
-    shippingPolicyId: "free_shipping",
-    maxPurchaseQuantity: 1,
-    detail: {
-      description: "가볍고 보온성이 뛰어난 프리미엄 소재를 사용했습니다.",
-      images: ["/images/products/coat-02-1.jpg"],
-      contentImages: ["/images/products/coat-detail.jpg"],
-      info: "1인당 1벌 구매 제한 상품입니다.",
-      specs: {
-        material: "Wool 80%, Cashmere 20%",
-        thickness: "THICK",
-        flexibility: false
-      }
-    },
-    variants: [
-      { id: "107-black-m", color: "Black", size: "M", stock: 5, additionalPrice: 0, isActive: true },
-      { id: "107-black-l", color: "Black", size: "L", stock: 3, additionalPrice: 0, isActive: true },
-      { id: "107-camel-m", color: "Camel", size: "M", stock: 2, additionalPrice: 10000, isActive: true }
+      { id: "107-kh-m", color: "Khaki", size: "M", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "107-kh-l", color: "Khaki", size: "L", stock: 13, additionalPrice: 0, isActive: true },
+      { id: "107-bk-m", color: "Black", size: "M", stock: 16, additionalPrice: 0, isActive: true },
+      { id: "107-bk-l", color: "Black", size: "L", stock: 20, additionalPrice: 0, isActive: true }
     ]
   },
   {
     id: 108,
-    title: "베이직 케이블 니트 베스트",
+    title: "케이블 니트 베스트",
     basePrice: 35000,
-    thumbnail: "/images/products/vest-01.jpg",
-    shortDescription: "레이어드하기 좋은 클래식 꽈배기 니트 조끼",
-    saleType: "NORMAL",
+    thumbnail: "/images/products/vest-04.jpg",
+    shortDescription: "셔츠나 티셔츠 위에 레이어드하기 좋은 니트 조끼",
+    saleType: "SALE",
     shippingPolicyId: "default",
-    maxPurchaseQuantity: 10,
+    maxPurchaseQuantity: 5,
     detail: {
-      description: "셔츠나 반팔 위에 가볍게 포인트 주기 좋습니다.",
-      images: ["/images/products/vest-01-1.jpg"],
-      contentImages: ["/images/products/vest-detail.jpg"],
-      info: "넥라인과 밑단 시보리가 탄탄합니다.",
+      description: "클래식한 케이블 패턴 짜임으로 고급스러운 무드를 줍니다.",
+      images: ["/images/products/vest-04-1.jpg"],
+      contentImages: ["/images/products/vest-knit.jpg"],
+      info: "소재 특성상 필링(보풀)이 발생할 수 있으니 주의하세요.",
       specs: {
         material: "Acrylic 80%, Polyester 20%",
-        thickness: "NORMAL",
+        thickness: "THICK",
         flexibility: true
       }
     },
     variants: [
-      { id: "108-navy-l", color: "Navy", size: "L", stock: 40, additionalPrice: 0, isActive: true },
-      { id: "108-ivory-m", color: "Ivory", size: "M", stock: 0, additionalPrice: 0, isActive: true }
+      { id: "108-iv-f", color: "Ivory", size: "FREE", stock: 35, additionalPrice: 0, isActive: true },
+      { id: "108-nv-f", color: "Navy", size: "FREE", stock: 12, additionalPrice: 0, isActive: true }
     ]
   },
   {
@@ -229,8 +240,10 @@ export const PRODUCTS: Product[] = [
       }
     },
     variants: [
-      { id: "109-bw-m", color: "Black/White", size: "M", stock: 15, additionalPrice: 0, isActive: true },
-      { id: "109-bw-l", color: "Black/White", size: "L", stock: 22, additionalPrice: 0, isActive: true }
+      { id: "109-bk-m", color: "Black", size: "M", stock: 5, additionalPrice: 0, isActive: true },
+      { id: "109-bk-l", color: "Black", size: "L", stock: 10, additionalPrice: 0, isActive: true },
+      { id: "109-wt-m", color: "White", size: "M", stock: 1, additionalPrice: 0, isActive: true },
+      { id: "109-wt-l", color: "White", size: "L", stock: 12, additionalPrice: 0, isActive: true }
     ]
   },
   {
@@ -254,138 +267,280 @@ export const PRODUCTS: Product[] = [
       }
     },
     variants: [
-      { id: "110-brown-m", color: "Brown", size: "M", stock: 8, additionalPrice: 0, isActive: true },
-      { id: "110-brown-l", color: "Brown", size: "L", stock: 5, additionalPrice: 0, isActive: true }
+      { id: "110-br-m", color: "Brown", size: "M", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "110-br-l", color: "Brown", size: "L", stock: 5, additionalPrice: 0, isActive: true },
+      { id: "110-bk-m", color: "Black", size: "M", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "110-bk-l", color: "Black", size: "L", stock: 9, additionalPrice: 0, isActive: true }
     ]
   },
   {
     id: 111,
-    title: "에센셜 크루 삭스 5팩",
-    basePrice: 15000,
-    thumbnail: "/images/products/socks-01.jpg",
-    shortDescription: "매일 신기 좋은 쫀쫀한 무지 양말 세트",
-    saleType: "BEST",
+    title: "그래픽 오버핏 맨투맨",
+    basePrice: 48000,
+    thumbnail: "/images/products/sweat-09.jpg",
+    shortDescription: "감각적인 전면 나염 프린팅 오버핏 스웨트셔츠",
+    saleType: "NORMAL",
     shippingPolicyId: "default",
-    maxPurchaseQuantity: 20,
+    maxPurchaseQuantity: 5,
     detail: {
-      description: "발목을 안정적으로 잡아주는 골지 디테일이 들어갔습니다.",
-      images: ["/images/products/socks-01-1.jpg"],
-      contentImages: ["/images/products/socks-detail.jpg"],
-      info: "남녀공용 프리사이즈 제품입니다.",
+      description: "안감은 쭈리 기모가 없는 고중량 루프 원단입니다.",
+      images: ["/images/products/sweat-09-1.jpg"],
+      contentImages: ["/images/products/sweat-graphic.jpg"],
+      info: "나염 보호를 위해 뒤집어 찬물 세탁을 하십시오.",
       specs: {
-        material: "Cotton 75%, Poly 20%, Span 5%",
-        thickness: "NORMAL",
+        material: "Cotton 100%",
+        thickness: "THICK",
         flexibility: true
       }
     },
     variants: [
-      { id: "111-mix-free", color: "Mix(Black/White/Gray)", size: "Free", stock: 150, additionalPrice: 0, isActive: true },
-      { id: "111-white-free", color: "All White", size: "Free", stock: 200, additionalPrice: 0, isActive: true }
+      { id: "111-me-m", color: "Melange", size: "M", stock: 22, additionalPrice: 0, isActive: true },
+      { id: "111-me-l", color: "Melange", size: "L", stock: 17, additionalPrice: 0, isActive: true },
+      { id: "111-gr-m", color: "Green", size: "M", stock: 11, additionalPrice: 0, isActive: true },
+      { id: "111-gr-l", color: "Green", size: "L", stock: 14, additionalPrice: 0, isActive: true }
     ]
   },
   {
     id: 112,
-    title: "빈티지 워싱 볼캡",
-    basePrice: 29000,
-    thumbnail: "/images/products/cap-01.jpg",
-    shortDescription: "자연스러운 색감이 매력적인 데일리 볼캡",
+    title: "치노 플랫 프론트 팬츠",
+    basePrice: 36000,
+    thumbnail: "/images/products/chino-01.jpg",
+    shortDescription: "기본에 충실한 깔끔한 일자핏 치노 면바지",
     saleType: "NORMAL",
     shippingPolicyId: "default",
     maxPurchaseQuantity: 5,
     detail: {
-      description: "얼굴이 작아보이는 깊은 크라운 패턴을 적용했습니다.",
-      images: ["/images/products/cap-01-1.jpg"],
-      contentImages: ["/images/products/cap-detail.jpg"],
-      info: "후면 스트랩으로 자유로운 사이즈 조절이 가능합니다.",
+      description: "가볍게 스판이 함유되어 면바지 특유의 뻣뻣함을 줄였습니다.",
+      images: ["/images/products/chino-01-1.jpg"],
+      contentImages: ["/images/products/chino-fit.jpg"],
+      info: "구김이 심할 경우 약한 온도로 다림질해 주세요.",
       specs: {
-        material: "Cotton 100%",
-        thickness: "NORMAL",
-        flexibility: false
-      }
-    },
-    variants: [
-      { id: "112-navy-free", color: "Navy", size: "Free", stock: 12, additionalPrice: 0, isActive: true },
-      { id: "112-green-free", color: "Green", size: "Free", stock: 4, additionalPrice: 0, isActive: true },
-      { id: "112-red-free", color: "Washed Red", size: "Free", stock: 0, additionalPrice: 0, isActive: false }
-    ]
-  },
-  {
-    id: 113,
-    title: "리얼 레더 첼시 부츠",
-    basePrice: 129000,
-    thumbnail: "/images/products/boots-01.jpg",
-    shortDescription: "천연 소가죽으로 제작된 날렵한 실루엣의 부츠",
-    saleType: "NEW",
-    shippingPolicyId: "free_shipping",
-    maxPurchaseQuantity: 2,
-    detail: {
-      description: "은은한 광택의 소가죽과 탄력 있는 밴딩으로 편안한 착화감을 제공합니다.",
-      images: ["/images/products/boots-01-1.jpg"],
-      contentImages: ["/images/products/boots-detail.jpg"],
-      info: "정사이즈를 추천드리며, 발볼이 넓으신 분은 한 사이즈 업을 권장합니다.",
-      specs: {
-        material: "Cow Leather 100%",
-        thickness: "THICK",
-        flexibility: false
-      }
-    },
-    variants: [
-      { id: "113-black-250", color: "Black", size: "250", stock: 3, additionalPrice: 0, isActive: true },
-      { id: "113-black-260", color: "Black", size: "260", stock: 5, additionalPrice: 0, isActive: true },
-      { id: "113-black-270", color: "Black", size: "270", stock: 8, additionalPrice: 0, isActive: true },
-      { id: "113-black-280", color: "Black", size: "280", stock: 2, additionalPrice: 15000, isActive: true }
-    ]
-  },
-  {
-    id: 114,
-    title: "워셔블 하프 집업 니트",
-    basePrice: 52000,
-    thumbnail: "/images/products/zipup-01.jpg",
-    shortDescription: "기계 세탁이 가능한 실용적인 하프 집업 니트",
-    saleType: "NORMAL",
-    shippingPolicyId: "default",
-    maxPurchaseQuantity: 5,
-    detail: {
-      description: "특수 가공된 원사를 사용하여 물세탁 시에도 수축이 거의 없습니다.",
-      images: ["/images/products/zipup-01-1.jpg"],
-      contentImages: ["/images/products/zipup-detail.jpg"],
-      info: "투웨이 지퍼를 사용하여 다양한 스타일링이 가능합니다.",
-      specs: {
-        material: "Acrylic 50%, Cotton 50%",
+        material: "Cotton 97%, Span 3%",
         thickness: "NORMAL",
         flexibility: true
       }
     },
     variants: [
-      { id: "114-gray-m", color: "Gray", size: "M", stock: 11, additionalPrice: 0, isActive: true },
-      { id: "114-gray-l", color: "Gray", size: "L", stock: 0, additionalPrice: 0, isActive: true },
-      { id: "114-navy-l", color: "Navy", size: "L", stock: 14, additionalPrice: 0, isActive: true }
+      { id: "112-kh-30", color: "Khaki", size: "30", stock: 12, additionalPrice: 0, isActive: true },
+      { id: "112-kh-32", color: "Khaki", size: "32", stock: 18, additionalPrice: 0, isActive: true },
+      { id: "112-tn-30", color: "Tan", size: "30", stock: 15, additionalPrice: 0, isActive: true },
+      { id: "112-tn-32", color: "Tan", size: "32", stock: 11, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 113,
+    title: "윈드브레이커 나일론 재킷",
+    basePrice: 75000,
+    thumbnail: "/images/products/jacket-11.jpg",
+    shortDescription: "생활 방수가 가능한 가벼운 바람막이 아우터",
+    saleType: "BEST",
+    shippingPolicyId: "free",
+    maxPurchaseQuantity: 2,
+    detail: {
+      description: "소매 밴딩과 밑단 스트링 디테일로 찬 바람을 차단합니다.",
+      images: ["/images/products/jacket-11-1.jpg"],
+      contentImages: ["/images/products/jacket-detail.jpg"],
+      info: "가벼운 오염은 물티슈로 닦아내고 기계 세탁 시 중성세제를 쓰세요.",
+      specs: {
+        material: "Nylon 100% (Waterproof)",
+        thickness: "THIN",
+        flexibility: false
+      }
+    },
+    variants: [
+      { id: "113-bk-m", color: "Black", size: "M", stock: 9, additionalPrice: 0, isActive: true },
+      { id: "113-bk-l", color: "Black", size: "L", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "113-od-m", color: "Olive-Drab", size: "M", stock: 4, additionalPrice: 0, isActive: true },
+      { id: "113-od-l", color: "Olive-Drab", size: "L", stock: 7, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 114,
+    title: "미니멀 가죽 벨트",
+    basePrice: 29000,
+    thumbnail: "/images/products/belt-01.jpg",
+    shortDescription: "소가죽으로 제작되어 견고한 기본 가죽 벨트",
+    saleType: "NORMAL",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 5,
+    detail: {
+      description: "매트한 실버 버클 디테일로 슬랙스나 데님에 모두 잘 묻어납니다.",
+      images: ["/images/products/belt-01-1.jpg"],
+      contentImages: ["/images/products/belt-buckle.jpg"],
+      info: "가죽 특성상 물이나 땀에 취약하므로 직사광선을 피해 보관하세요.",
+      specs: {
+        material: "Cowhide 100%",
+        thickness: "NORMAL",
+        flexibility: false
+      }
+    },
+    variants: [
+      { id: "114-bk-m", color: "Black", size: "M(30-32)", stock: 40, additionalPrice: 0, isActive: true },
+      { id: "114-bk-l", color: "Black", size: "L(34-36)", stock: 25, additionalPrice: 0, isActive: true },
+      { id: "114-db-m", color: "Dark Brown", size: "M(30-32)", stock: 18, additionalPrice: 0, isActive: true },
+      { id: "114-db-l", color: "Dark Brown", size: "L(34-36)", stock: 12, additionalPrice: 0, isActive: true }
     ]
   },
   {
     id: 115,
-    title: "오버사이즈 덕다운 푸퍼",
-    basePrice: 189000,
-    thumbnail: "/images/products/puffer-01.jpg",
-    shortDescription: "풍성한 볼륨감과 뛰어난 보온성의 숏패딩",
-    saleType: "SALE",
-    shippingPolicyId: "heavy_cargo",
-    maxPurchaseQuantity: 2,
+    title: "캔버스 버킷 햇",
+    basePrice: 24000,
+    thumbnail: "/images/products/hat-03.jpg",
+    shortDescription: "기분 좋게 푹 눌러쓸 수 있는 탄탄한 캔버스 버킷햇",
+    saleType: "NORMAL",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 5,
     detail: {
-      description: "솜털 80, 깃털 20 비율의 우수한 덕다운 충전재를 아낌없이 넣었습니다.",
-      images: ["/images/products/puffer-01-1.jpg"],
-      contentImages: ["/images/products/puffer-detail.jpg"],
-      info: "부피가 커서 특수 화물 배송비(heavy_cargo)가 적용됩니다.",
+      description: "두께감 있는 10수 캔버스 원단으로 핏이 자연스럽게 무너집니다.",
+      images: ["/images/products/hat-03-1.jpg"],
+      contentImages: ["/images/products/hat-angle.jpg"],
+      info: "형태 유지를 위해 가벼운 손세탁을 권장합니다.",
       specs: {
-        material: "Nylon 100%, Duck Down 80/20",
+        material: "Cotton 100%",
         thickness: "THICK",
         flexibility: false
       }
     },
     variants: [
-      { id: "115-black-m", color: "Black", size: "M", stock: 5, additionalPrice: 0, isActive: true },
-      { id: "115-black-l", color: "Black", size: "L", stock: 2, additionalPrice: 0, isActive: true },
-      { id: "115-silver-l", color: "Silver", size: "L", stock: 0, additionalPrice: 20000, isActive: false }
+      { id: "115-ec-58", color: "Ecru", size: "58", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "115-ec-60", color: "Ecru", size: "60", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "115-bk-58", color: "Black", size: "58", stock: 22, additionalPrice: 0, isActive: true },
+      { id: "115-bk-60", color: "Black", size: "60", stock: 19, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 116,
+    title: "헤비 코튼 카디건",
+    basePrice: 54000,
+    thumbnail: "/images/products/cardigan-02.jpg",
+    shortDescription: "묵직하게 떨어지는 실루엣의 로브 칼라 니트 가디건",
+    saleType: "NORMAL",
+    shippingPolicyId: "free",
+    maxPurchaseQuantity: 3,
+    detail: {
+      description: "늘어남을 최소화하기 위해 특수 변형 짜임으로 편직하였습니다.",
+      images: ["/images/products/cardigan-02-1.jpg"],
+      contentImages: ["/images/products/cardigan-texture.jpg"],
+      info: "옷걸이에 걸어두면 늘어날 수 있으니 개어서 보관해 주세요.",
+      specs: {
+        material: "Cotton 60%, Acrylic 40%",
+        thickness: "THICK",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "116-ot-m", color: "Oatmeal", size: "M", stock: 11, additionalPrice: 0, isActive: true },
+      { id: "116-ot-l", color: "Oatmeal", size: "L", stock: 16, additionalPrice: 0, isActive: true },
+      { id: "116-cc-m", color: "Charcoal", size: "M", stock: 9, additionalPrice: 0, isActive: true },
+      { id: "116-cc-l", color: "Charcoal", size: "L", stock: 13, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 117,
+    title: "피케 칼라 반팔 셔츠",
+    basePrice: 28000,
+    thumbnail: "/images/products/pique-01.jpg",
+    shortDescription: "단정하고 통기성이 좋은 카라 피케 반팔티",
+    saleType: "SALE",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 10,
+    detail: {
+      description: "벌집 모양의 피케 조직으로 몸에 잘 달라붙지 않아 여름철 쾌적합니다.",
+      images: ["/images/products/pique-01-1.jpg"],
+      contentImages: ["/images/products/pique-neck.jpg"],
+      info: "세탁 후 가볍게 털어서 그늘에 건조해 주세요.",
+      specs: {
+        material: "Cotton 100%",
+        thickness: "NORMAL",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "117-wt-m", color: "White", size: "M", stock: 30, additionalPrice: 0, isActive: true },
+      { id: "117-wt-l", color: "White", size: "L", stock: 42, additionalPrice: 0, isActive: true },
+      { id: "117-bg-m", color: "Burgundy", size: "M", stock: 15, additionalPrice: 0, isActive: true },
+      { id: "117-bg-l", color: "Burgundy", size: "L", stock: 18, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 118,
+    title: "스웨트 이지 쇼츠",
+    basePrice: 22000,
+    thumbnail: "/images/products/shorts-04.jpg",
+    shortDescription: "홈웨어 및 가벼운 외출에 좋은 밴딩 반바지",
+    saleType: "NORMAL",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 5,
+    detail: {
+      description: "허리 전체 스트링 밴딩 처리로 체형에 구애 없이 편안하게 잘 맞습니다.",
+      images: ["/images/products/shorts-04-1.jpg"],
+      contentImages: ["/images/products/shorts-waist.jpg"],
+      info: "첫 세탁 시 미세한 물 빠짐이 있을 수 있으니 단독 세탁을 권장합니다.",
+      specs: {
+        material: "Cotton 100%",
+        thickness: "NORMAL",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "118-me-s", color: "Melange", size: "S", stock: 14, additionalPrice: 0, isActive: true },
+      { id: "118-me-m", color: "Melange", size: "M", stock: 28, additionalPrice: 0, isActive: true },
+      { id: "118-bk-m", color: "Black", size: "M", stock: 33, additionalPrice: 0, isActive: true },
+      { id: "118-bk-l", color: "Black", size: "L", stock: 21, additionalPrice: 0, isActive: true }
+    ]
+  },
+  {
+    id: 119,
+    title: "워크웨어 코튼 재킷",
+    basePrice: 89000,
+    thumbnail: "/images/products/work-01.jpg",
+    shortDescription: "내구성이 뛰어난 코튼 캔버스 소재의 워크 재킷",
+    saleType: "NEW",
+    shippingPolicyId: "free",
+    maxPurchaseQuantity: 2,
+    detail: {
+      description: "빈티지한 무드의 스티치 디테일과 전면 대형 아웃포켓이 특징입니다.",
+      images: ["/images/products/work-01-1.jpg"],
+      contentImages: ["/images/products/work-pocket.jpg"],
+      info: "기계 세탁이 가능하나 잦은 세탁은 에이징 효과를 가속화할 수 있습니다.",
+      specs: {
+        material: "Cotton 100%",
+        thickness: "THICK",
+        flexibility: false
+      }
+    },
+    variants: [
+      { id: "119-br-l", color: "Brown", size: "L", stock: 6, additionalPrice: 0, isActive: true },
+      { id: "119-br-xl", color: "Brown", size: "XL", stock: 3, additionalPrice: 3000, isActive: true },
+      { id: "119-cc-l", color: "Charcoal", size: "L", stock: 8, additionalPrice: 0, isActive: true },
+      { id: "119-cc-xl", color: "Charcoal", size: "XL", stock: 4, additionalPrice: 3000, isActive: true }
+    ]
+  },
+  {
+    id: 120,
+    title: "코튼 크루삭스 3팩",
+    basePrice: 12000,
+    thumbnail: "/images/products/socks-01.jpg",
+    shortDescription: "발목까지 부드럽게 감싸주는 고품질 면 양말 패키지",
+    saleType: "BEST",
+    shippingPolicyId: "default",
+    maxPurchaseQuantity: 10,
+    detail: {
+      description: "흘러내림 방지 밴딩 가공 처리가 되어 있어 일상생활에서 안정적입니다.",
+      images: ["/images/products/socks-01-1.jpg"],
+      contentImages: ["/images/products/socks-band.jpg"],
+      info: "건조기 사용 시 세로 수축이 있을 수 있으니 자연 건조를 권장합니다.",
+      specs: {
+        material: "Cotton 85%, Polyester 12%, Span 3%",
+        thickness: "NORMAL",
+        flexibility: true
+      }
+    },
+    variants: [
+      { id: "120-wp-m", color: "White-Pack", size: "M(230-250)", stock: 50, additionalPrice: 0, isActive: true },
+      { id: "120-wp-l", color: "White-Pack", size: "L(260-280)", stock: 65, additionalPrice: 0, isActive: true },
+      { id: "120-mp-m", color: "Multi-Pack", size: "M(230-250)", stock: 35, additionalPrice: 1000, isActive: true },
+      { id: "120-mp-l", color: "Multi-Pack", size: "L(260-280)", stock: 40, additionalPrice: 1000, isActive: true }
     ]
   }
 ];

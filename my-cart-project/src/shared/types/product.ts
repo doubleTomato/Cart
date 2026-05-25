@@ -3,7 +3,8 @@
 export type SaleType =
   | "NEW"
   | "BEST"
-  | "SALE";
+  | "SALE"
+  | "NORMAL";
 
 export type Thickness =
   | "THIN"

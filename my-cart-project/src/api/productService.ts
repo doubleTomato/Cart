@@ -1,4 +1,4 @@
-import { CLOTHING_PRODUCTS } from '@/constants/listProduct'; 
+import { PRODUCTS } from '@/constants/products'; 
 import type { Product } from '../shared/types/product';
 import { DISCOUNT_POLICIES } from '@/shared/policy/discountPolicy';
 import type { DiscountPolicyValue, DiscountPolicyKey } from '@/shared/policy/discountPolicy';
@@ -7,7 +7,7 @@ import type { DiscountPolicyValue, DiscountPolicyKey } from '@/shared/policy/dis
 export const getProducts = async (): Promise<Product[]> => {
   // 로컬 데이터 0.5초 뒤에 반환 => 네트워크 지연 테스트용
   return new Promise((resolve) => {
-    setTimeout(() => resolve(CLOTHING_PRODUCTS), 500);
+    setTimeout(() => resolve(PRODUCTS), 500);
   });
 };
 
@@ -15,7 +15,7 @@ export const getProducts = async (): Promise<Product[]> => {
 export const getProductById = async (id: number): Promise<Product | undefined> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const product = CLOTHING_PRODUCTS.find(p => p.id === id);
+      const product = PRODUCTS.find(p => p.id === id);
       resolve(product);
     }, 300);
   });

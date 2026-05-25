@@ -1,3 +1,4 @@
+import '@/assets/css/main.scss';
 import { useEffect, useState } from 'react';
 import { Header } from '@/layouts/Header';
 import { Footer } from '@/layouts/Footer';

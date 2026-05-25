@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { getProductById, getSaleInfo } from "@/api/productService";
 import type { Product } from '@/shared/types/product';
-import type { DiscountPolicyValue } from '@/shared/policy/discountPolicy';
+import type { DiscountPolicyKey } from '@/shared/policy/discountPolicy';
 import { useParams } from 'react-router-dom';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
 import { CustomSelect } from '@/components/common/CustomSelect';
@@ -16,7 +16,7 @@ import { Image } from '@/components/common/Image';
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
     const [products, setProducts] = useState<Product | null >(null);
-    const [sales, setSales] = useState<Record<string, DiscountPolicyValue>>({});
+    const [sales, setSales] = useState<Record<string, DiscountPolicyKey>>({});
     const [isLoading, setIsLoading] = useState(true);
 
     const [filters, setFilters] = useState({
@@ -46,7 +46,7 @@ export default function ProductDetailPage() {
         ]).then(([productData, saleData]) => {
             if (productData) {
                 setProducts(productData);
-                setMainImg(productData.imgUrl);
+                setMainImg(productData.detail.images[0]); // 상세 이미지 중 첫 번째를 메인으로 설정, 없으면 기본 이미지
             }
             if (saleData) {
                 setSales(saleData);
@@ -64,7 +64,7 @@ export default function ProductDetailPage() {
         if(selectedProducts.length === 0) return;
         selectedProducts.map((v) => (
             addItem(v)
-        ));        
+        ));
         // alert("장바구니에 담겼습니다!");
          setPopupConfig({
             type:"alert", state:"success", 
@@ -72,19 +72,36 @@ export default function ProductDetailPage() {
         });
     };
 
+
+    const colorOptions = useMemo(() => 
+    Array.from(new Set(products?.variants.map((v) =>(v.color))) || [])
+    .map((color) => ({ label: color, value: color })),
+    [products?.variants]
+    );
+
+    const sizeOptions = useMemo(() => {
+        if (!filters.color) return [];
+        return products?.variants.filter((v) => v.color === filters.color?.value)   ;
+    }, [filters.color, products?.variants]);
+    // console.log('colorOptions', colorOptions);
+
+    console.log('sized ',sizeOptions)
+
     // total 가격 및 값
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
     if (isLoading) return <div>로딩 중...</div>;
     const {material, thickness, flexibility} = products?.detail?.specs || {};
     
-    const colorOptions = products?.detail?.colors.map((color) => ({
+    /*const colorOptions = products?.detail?.colors.map((color) => ({
         label: color,
         value: color
     }));
     const sizeOptions = products?.detail?.sizes.map((size) => ({
         label: size,
         value: size
-    }));
+    }));*/
+
+    
     
 
 
@@ -154,7 +171,7 @@ export default function ProductDetailPage() {
     }
 
     // img mapping
-    const imgList = [products?.imgUrl, ...products?.detail?.images || []].filter(Boolean);
+    const imgList = [products?.detail.images[0], ...products?.detail?.images || []].filter(Boolean);
 
 
 
@@ -165,7 +182,7 @@ export default function ProductDetailPage() {
             quantity: acc.quantity + cur.quantity
         };
     }, { price: 0, quantity: 0 });
-
+    
 
 
 
@@ -183,17 +200,17 @@ export default function ProductDetailPage() {
             </div>
             <div className='rightContent'>
                 <div className='productInfo'>
-                    <h1>{products?.discountPolicy && <p className='saleType'>{products?.discountPolicy && sales?.[products?.discountPolicy].label}</p>} {products?.title}</h1>
+                    <h1>{products?.saleType && <p className='saleType'>{products?.saleType !== 'NORMAL' && sales?.[products?.saleType].label}</p>} {products?.title}</h1>
                     
-                    <p className='desc'>{products?.desc}</p>
+                    <p className='desc'>{products?.detail.description}</p>
                     <div className='ratingWrap'></div>
                     <p>
-                        <span className={`originPrice ${!products?.discountPolicy && 'noSale'}`}>{products?.price.toLocaleString() ?? 0}원</span>
+                        <span className={`originPrice ${ products?.saleType !== 'NORMAL' ? 'noSale':''}`}>{products?.basePrice.toLocaleString() ?? 0}원</span>
                     </p>
-                    {products?.discountPolicy && 
+                    {products?.saleType && 
                     <p className='salePrice'>
                         <span>{discountedPrice.toLocaleString() ?? 0}원</span>
-                        <span>{sales?.[products?.discountPolicy].rate}%</span>
+                        <span>{sales?.[products?.saleType].rate}%</span>
                     </p>}
                 </div>
                 <hr/>
@@ -210,6 +227,22 @@ export default function ProductDetailPage() {
                     value={filters.size}
                     onChange={(selectedOption) => {changeSelect(selectedOption)}}
                     />
+
+                    <CustomSelect
+                options={sizeOptions ?? []}
+                value={filters.size}
+                onChange={(opt) => setFilters({...filters, size: opt})}
+                getLabel={(opt) => `${opt.color} / ${opt.size}`}
+                renderOption={(opt) => (
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "10px" }}>
+                        <span>{opt.color} ({opt.size})</span>
+                        <span style={{ fontSize: "12px", color: "#666" }}>
+                            {opt.stock}개 남음
+                            {opt.additionalPrice > 0 && ` (+${opt.additionalPrice.toLocaleString()}원)`}
+                        </span>
+                    </div>
+                )}
+            />
                    <div className='selectedProduct'>
                     {selectedProducts.map((p) => (
                         <SelectedItemCard

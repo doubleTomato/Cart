@@ -26,8 +26,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
-  -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   line-height: 1.15;
 }
 
@@ -47,8 +46,7 @@ img, picture, video, canvas, svg {
 }
 
 img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
   width: 100%;
 }
@@ -113,9 +111,7 @@ hr {
   outline: none;
   border: none;
   white-space: nowrap;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .btn.primary {
   background-color: #4A4A4A;
@@ -222,13 +218,11 @@ hr {
 }
 .customSelectWrap .customOpenBtn span {
   display: block;
-  width: -moz-max-content;
   width: max-content;
   font-weight: 700;
 }
 .customSelectWrap .customOpt {
   color: #666;
-  height: -moz-max-content;
   height: max-content;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -560,8 +554,7 @@ hr {
   height: 100%;
 }
 .mainLayout .home .sliderWrap .swiper img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .mainLayout .home .bottomContent {
   width: 1200px;
@@ -581,7 +574,6 @@ hr {
 }
 .mainLayout .home .bottomContent .tapWrap ul li {
   padding: 0px 20px;
-  height: -moz-max-content;
   height: max-content;
   position: relative;
   font-size: 1.25rem;
@@ -605,6 +597,8 @@ hr {
 }
 .mainLayout .home .listWrap .cardItem {
   width: calc(25% - 20px);
+  padding: 5px 10px;
+  box-sizing: border-box;
 }
 .mainLayout .home .listWrap .cardItem .imgWrap {
   width: 100%;
@@ -641,7 +635,7 @@ hr {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
 }
 .mainLayout .home .listWrap .cardItem .textWrap .priceBox .discountRate {
   display: inline-block;
@@ -660,7 +654,7 @@ hr {
   background-color: rgb(116, 176, 60);
 }
 .mainLayout .home .listWrap .cardItem .textWrap .priceBox .originPrice {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   color: #666;
   text-decoration: line-through;
 }
@@ -729,7 +723,6 @@ hr {
   background-color: #7D6E5D;
   color: #fff;
   display: inline-block;
-  width: -moz-max-content;
   width: max-content;
   padding: 2.5px 5px;
   border-radius: 2.5px;
@@ -826,4 +819,8 @@ footer {
   padding: 15px 20px;
   margin-top: 20px;
   box-sizing: border-box;
+}
+
+.test-selector {
+  color: red;
 }/*# sourceMappingURL=main.css.map */
