@@ -198,7 +198,7 @@ hr {
 .badge {
   width: 20px;
   height: 20px;
-  background-color: #4A4A4A;
+  background-color: #7D6E5D;
   color: #fff;
   border-radius: 20px;
   text-align: center;
@@ -208,6 +208,7 @@ hr {
 
 .customSelectWrap {
   min-width: 120px;
+  position: relative;
   border-radius: 5px;
   border: 1px solid #ccc;
   box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
@@ -227,8 +228,19 @@ hr {
 }
 .customSelectWrap .customOpt {
   color: #666;
+  height: -moz-max-content;
+  height: max-content;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 .customSelectWrap .customOpt li {
+  background-color: #fff;
   padding: 5px 20px;
 }
 .customSelectWrap .customOpt li:hover {
@@ -337,6 +349,9 @@ hr {
   padding: 0 10px;
   box-sizing: border-box;
   background-color: rgba(239, 239, 239, 0.9);
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 2px 7px 0px rgba(51, 51, 51, 0.3411764706);
   transition: right 0.2s ease, transform 0.2s ease;
 }
 .sideBarCart.open {
@@ -346,6 +361,11 @@ hr {
   height: 60px;
   position: relative;
   border-bottom: 1px solid rgba(125, 110, 93, 0.2);
+}
+.sideBarCart .closeWrap h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 59px;
 }
 .sideBarCart .closeWrap .closeBtn {
   font-size: 1.75rem;
@@ -388,10 +408,13 @@ hr {
   border-width: 0px;
 }
 .sideBarCart .showViewBtn {
-  display: flex;
-  align-items: center;
+  position: relative;
   position: absolute;
   bottom: 80px;
+}
+.sideBarCart .showViewBtn > a {
+  display: flex;
+  align-items: center;
 }
 
 .headerWrap {
@@ -401,7 +424,7 @@ hr {
   align-items: center;
   justify-content: space-between;
   padding: 0px 15%;
-  background-color: rgb(239, 239, 239);
+  background-color: #4A4A4A;
   border-bottom: 1px solid rgba(125, 110, 93, 0.1);
   box-shadow: 3px 3px 3px rgba(239, 239, 239, 0.6862745098);
   position: sticky;
@@ -413,13 +436,15 @@ hr {
   gap: 6px;
   align-items: center;
   font-size: 1.25rem;
+  color: #fff;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 .headerWrap .rightContent li i {
   font-size: 1.25rem;
 }
 .headerWrap .rightContent li:hover {
   cursor: pointer;
-  color: rgba(74, 74, 74, 0.6);
+  color: rgba(248, 247, 245, 0.6);
   transition: color 0.2s ease, transform 0.2s ease;
   transition: font-weight 0.2s ease, transform 0.2s ease;
 }
@@ -546,7 +571,6 @@ hr {
   width: 100%;
   height: 60px;
   background-color: #fff;
-  border: 1px solid #efefef;
   display: flex;
   justify-content: space-between;
 }
@@ -617,7 +641,7 @@ hr {
   margin-top: 15px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 .mainLayout .home .listWrap .cardItem .textWrap .priceBox .discountRate {
   display: inline-block;
@@ -625,6 +649,20 @@ hr {
   border-radius: 5px;
   background-color: #7D6E5D;
   color: #fff;
+}
+.mainLayout .home .listWrap .cardItem .textWrap .priceBox .discountRate.sale {
+  background-color: rgb(176, 60, 60);
+}
+.mainLayout .home .listWrap .cardItem .textWrap .priceBox .discountRate.best {
+  background-color: #4A4A4A;
+}
+.mainLayout .home .listWrap .cardItem .textWrap .priceBox .discountRate.new {
+  background-color: rgb(116, 176, 60);
+}
+.mainLayout .home .listWrap .cardItem .textWrap .priceBox .originPrice {
+  font-size: 1.35rem;
+  color: #666;
+  text-decoration: line-through;
 }
 .mainLayout .home .listWrap .cardItem .textWrap .priceBox .price {
   font-size: 1.8rem;
@@ -745,6 +783,40 @@ hr {
   border-radius: 5px;
   padding: 5px 10px;
   color: #fff;
+}
+.mainLayout .cartPage {
+  width: 100%;
+  background-color: rgba(74, 74, 74, 0.1);
+}
+.mainLayout .cartPage h1 {
+  padding: 15px 0;
+  font-size: 1.25rem;
+  width: 1200px;
+  margin: 0 auto;
+}
+.mainLayout .cartPage .contentWrap {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.mainLayout .cartPage .contentWrap > div {
+  background-color: #fff;
+}
+.mainLayout .cartPage .contentWrap .cartList {
+  width: 65%;
+}
+.mainLayout .cartPage .contentWrap .orderSummary {
+  width: 32.5%;
+}
+.mainLayout .cartPage .contentWrap .productList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.mainLayout .cartPage .contentWrap .productList li .selectProductWrap {
+  box-shadow: none;
+  border-width: 0px;
 }
 
 footer {

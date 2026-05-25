@@ -1,5 +1,5 @@
 import type { Product } from "../types/product";
-import type { DiscountPolicyValue } from "@/constants/discountPolicy";
+import type { DiscountPolicyValue } from "@/shared/policy/discountPolicy";
 
 export const getDiscountedPrice = (
   product: Product | null | undefined, 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { getProductById, getSaleInfo } from "@/api/productService";
 import type { Product } from '@/shared/types/product';
-import type { DiscountPolicyValue } from '@/constants/discountPolicy';
+import type { DiscountPolicyValue } from '@/shared/policy/discountPolicy';
 import { useParams } from 'react-router-dom';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
 import { CustomSelect } from '@/components/common/CustomSelect';
@@ -57,7 +57,7 @@ export default function ProductDetailPage() {
         });
     }, [id]);
 
-        // 장바구니에 추가
+    // 장바구니에 추가
     const addItem = useCartStore((state) => state.addItem);
 
     const handleAddToCart = () => {

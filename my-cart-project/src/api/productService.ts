@@ -1,7 +1,7 @@
 import { CLOTHING_PRODUCTS } from '@/constants/listProduct'; 
 import type { Product } from '../shared/types/product';
-import { DISCOUNT_POLICIES } from '@/constants/discountPolicy';
-import type { DiscountPolicyValue, DiscountPolicyKey } from '@/constants/discountPolicy';
+import { DISCOUNT_POLICIES } from '@/shared/policy/discountPolicy';
+import type { DiscountPolicyValue, DiscountPolicyKey } from '@/shared/policy/discountPolicy';
 
 // 리스트 전체 불러오기
 export const getProducts = async (): Promise<Product[]> => {

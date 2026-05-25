@@ -1,14 +1,10 @@
-// import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import ProductListPage from '@/pages/cart/ProductListPage';
 import ProductDetailPage from '@/pages/cart/ProductDetailPage';
 import CartPage from '@/pages/cart/CartPage';
 
-
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <>
       <BrowserRouter>

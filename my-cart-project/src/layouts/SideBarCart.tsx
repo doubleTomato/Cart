@@ -5,6 +5,7 @@ import { useShallow } from "zustand/shallow";
 import { MdDelete, MdArrowForwardIos, MdOutlineClose } from "react-icons/md";
 import type { PopupProps } from "@/shared/types/popup";
 import { BasePopup } from "@/components/common/popup/BasePopup";
+import { Link } from "react-router-dom";
 
 interface SideBarProps {
     isOpen: boolean;
@@ -55,6 +56,7 @@ export const SideBarCart = ({isOpen, onClose}:SideBarProps) => {
         <>
             <nav className={`sideBarCart ${isOpen ? 'open':''}`}>
                 <div className="closeWrap">
+                    <h2>장바구니</h2>
                     <p className="closeBtn" title="장바구니 닫기" onClick={onClose}>
                         <MdOutlineClose/>
                     </p>
@@ -82,7 +84,7 @@ export const SideBarCart = ({isOpen, onClose}:SideBarProps) => {
                         ))
                     }
                 </div>
-                <div className="showViewBtn btn primary full">장바구니 전체보기 ({cartItems.length}) <MdArrowForwardIos/></div>
+                <div className="showViewBtn btn primary full"><Link to='/cart'> 장바구니 전체보기 ({cartItems.length}) <MdArrowForwardIos/></Link></div>
             </nav>
             {popupConfig && <BasePopup
                             key={popupConfig.type}
