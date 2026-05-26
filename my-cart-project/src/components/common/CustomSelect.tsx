@@ -22,7 +22,7 @@ export const CustomSelect = <T,>({
 }: CustomSelectProps<T>) => {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-
+    console.log('customeSele',options);
     useEffect(() => {
         const handleOutsideClick = (e: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -47,6 +47,7 @@ export const CustomSelect = <T,>({
                             key={"opt" + i}
                             onMouseDown={() => {
                                 onChange(opt);
+                                console.log('onMouseDown',opt);
                                 setIsOpen(false);
                             }}
                         >

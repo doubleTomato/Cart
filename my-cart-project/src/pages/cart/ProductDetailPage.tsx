@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useCartStore } from '@/stores/useCartStore';
 import { getProductById, getSaleInfo } from "@/api/productService";
-import type { Product } from '@/shared/types/product';
-import type { DiscountPolicyKey } from '@/shared/policy/discountPolicy';
+import type { Product, ProductVariant } from '@/shared/types/product';
+import type { DiscountPolicyKey, DiscountPolicyValue } from '@/shared/policy/discountPolicy';
 import { useParams } from 'react-router-dom';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
 import { CustomSelect } from '@/components/common/CustomSelect';
-import type { SelectOption } from '@/shared/types/select';
 import type { SelectedItemData } from '@/shared/types/selectedProduct';
 import { SelectedItemCard } from '@/components/product/SelectProduct';
 
@@ -16,13 +15,20 @@ import { Image } from '@/components/common/Image';
 export default function ProductDetailPage() {
     const { id } = useParams<{id: string}>();
     const [products, setProducts] = useState<Product | null >(null);
-    const [sales, setSales] = useState<Record<string, DiscountPolicyKey>>({});
+    const [sales, setSales] = useState<Record<DiscountPolicyKey, DiscountPolicyValue>>({});
     const [isLoading, setIsLoading] = useState(true);
 
+    // const [filters, setFilters] = useState({
+    //     color: undefined as SelectOption | string | undefined,
+    //     size: undefined as SelectOption | string | undefined,
+    // });
+
+
     const [filters, setFilters] = useState({
-        color: undefined as SelectOption | undefined,
-        size: undefined as SelectOption | undefined,
-    });
+    color: undefined as string | undefined,
+    size: undefined as ProductVariant | undefined,
+});
+
 
     // 메인 이미지
     const [mainImg, setMainImg] = useState('');
@@ -74,18 +80,15 @@ export default function ProductDetailPage() {
 
 
     const colorOptions = useMemo(() => 
-    Array.from(new Set(products?.variants.map((v) =>(v.color))) || [])
-    .map((color) => ({ label: color, value: color })),
+    Array.from(new Set(products?.variants.map((v) =>(v.color))) || []),
     [products?.variants]
     );
 
     const sizeOptions = useMemo(() => {
         if (!filters.color) return [];
-        return products?.variants.filter((v) => v.color === filters.color?.value)   ;
+        return products?.variants.filter((v) => v.color === filters.color)   ;
     }, [filters.color, products?.variants]);
-    // console.log('colorOptions', colorOptions);
 
-    console.log('sized ',sizeOptions)
 
     // total 가격 및 값
     const discountedPrice = getDiscountedPrice(products, sales ? sales : {});
@@ -102,6 +105,7 @@ export default function ProductDetailPage() {
     }));*/
 
     
+    console.log(products);
     
 
 
@@ -132,7 +136,7 @@ export default function ProductDetailPage() {
 
 
  // 사이즈 선택 시 작동
-    const changeSelect = (selectedOption:SelectOption) => {
+    const changeSelect = (selectedOption: ProductVariant | undefined) => {
         if(products === undefined) return;
         if(!filters.color){
             setPopupConfig({
@@ -141,8 +145,8 @@ export default function ProductDetailPage() {
             });
             return;
         }
-        const curSize = selectedOption.value;
-        const curColor = filters.color.value;
+        const curSize = selectedOption?.size;
+        const curColor = filters.color;
         const targetCombinationId = `${products?.id}-${curColor}-${curSize}`;
 
         setFilters({...filters, size: selectedOption})
@@ -171,7 +175,7 @@ export default function ProductDetailPage() {
     }
 
     // img mapping
-    const imgList = [products?.detail.images[0], ...products?.detail?.images || []].filter(Boolean);
+    const imgList = [...products?.detail?.images || [], ...products?.detail?.contentImages || []].filter(Boolean);
 
 
 
@@ -200,45 +204,41 @@ export default function ProductDetailPage() {
             </div>
             <div className='rightContent'>
                 <div className='productInfo'>
-                    <h1>{products?.saleType && <p className='saleType'>{products?.saleType !== 'NORMAL' && sales?.[products?.saleType].label}</p>} {products?.title}</h1>
+                    <h1>{products?.saleType !== 'NORMAL' && <p className='saleType'>{products?.saleType !== 'NORMAL' && sales?.[products?.saleType].label}</p>} {products?.title}</h1>
                     
                     <p className='desc'>{products?.detail.description}</p>
                     <div className='ratingWrap'></div>
                     <p>
-                        <span className={`originPrice ${ products?.saleType !== 'NORMAL' ? 'noSale':''}`}>{products?.basePrice.toLocaleString() ?? 0}원</span>
+                        <span className={`originPrice ${ products?.saleType === 'NORMAL' ? 'noSale':''}`}>{products?.basePrice.toLocaleString() ?? 0}원</span>
                     </p>
-                    {products?.saleType && 
+                    {products?.saleType !== 'NORMAL' && 
                     <p className='salePrice'>
                         <span>{discountedPrice.toLocaleString() ?? 0}원</span>
-                        <span>{sales?.[products?.saleType].rate}%</span>
+                        <span>{products?.saleType && sales?.[products?.saleType].rate}%</span>
                     </p>}
                 </div>
                 <hr/>
                 <div className='productEctAction'>
                     <p>배송정보</p>
                     <p>배송비</p>
-                    <CustomSelect sName="color-sel" 
-                    options={colorOptions ?? []}
-                    value={filters.color}
-                    onChange={(selectedOption)=> {setFilters({...filters, color: selectedOption})}}
+                    
+                    <CustomSelect<string>
+                   options={colorOptions ?? []}
+                value={filters.color || null}
+                onChange={(opt) => setFilters((prev) => ({ ...prev, color: opt }))}
+                getLabel={(opt) => `${opt}`}
                     />
-                    <CustomSelect sName="size-sel" 
-                    options={sizeOptions ?? []}
-                    value={filters.size}
-                    onChange={(selectedOption) => {changeSelect(selectedOption)}}
-                    />
-
                     <CustomSelect
                 options={sizeOptions ?? []}
                 value={filters.size}
-                onChange={(opt) => setFilters({...filters, size: opt})}
-                getLabel={(opt) => `${opt.color} / ${opt.size}`}
+                onChange={(opt) => changeSelect(opt)}
+                getLabel={(opt) => `${opt?.color} / ${opt?.size}`}
                 renderOption={(opt) => (
                     <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "10px" }}>
-                        <span>{opt.color} ({opt.size})</span>
+                        <span>{opt?.color} ({opt?.size})</span>
                         <span style={{ fontSize: "12px", color: "#666" }}>
-                            {opt.stock}개 남음
-                            {opt.additionalPrice > 0 && ` (+${opt.additionalPrice.toLocaleString()}원)`}
+                            {opt?.stock}개 남음
+                            {(opt?.additionalPrice || 0) > 0 && ` (+${opt?.additionalPrice.toLocaleString()}원)`}
                         </span>
                     </div>
                 )}

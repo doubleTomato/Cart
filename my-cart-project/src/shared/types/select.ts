@@ -1,6 +1,9 @@
 export interface SelectOption{
     label?: string;
-    value: string | number;
+    size?: string | number;
+    color?: string;
+    stock?: number;
+    additionalPrice?: number;
 }
 
 export interface  SelectProps{
