@@ -14,8 +14,8 @@ import { PRODUCTS } from '@/constants/products';
 import { CardItem } from '@/components/cart/CartItem';
 
 const banners = [
-  { id: 1, imgUrl: "banner1.jpg", link: "/promotion/1" },
-  { id: 2, imgUrl: "banner2.jpg", link: "/product/45" }
+  { id: 1, imgUrl: "/images/banners/banner1.jpg", link: "/promotion/1" },
+  { id: 2, imgUrl: "/images/banners/banner2.jpg", link: "/product/45" }
 ];
 
 const orderBy = ['인기순','최신순','오래된순','높은 할인순'];
@@ -34,7 +34,7 @@ export default function ProductListPage() {
                     >
                     {
                         banners.map((x, i) => (
-                             <SwiperSlide>
+                        <SwiperSlide>
                             <Image src={x.imgUrl} alt="{i+1}" classN="" />
                             {i}
                         </SwiperSlide>

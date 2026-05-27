@@ -12,9 +12,7 @@ interface SideBarProps {
     onClose: () => void;
 }
 
-
-
-export const SideBarCart = ({isOpen, onClose}:SideBarProps) => {
+export const SideBarCart = ({ isOpen, onClose }: SideBarProps) => {
     const { updateQuantity, clearCart, removeItem, cartItems } = useCartStore(
         useShallow((state) => ({
             updateQuantity: state.updateQuantity,
@@ -23,78 +21,107 @@ export const SideBarCart = ({isOpen, onClose}:SideBarProps) => {
             cartItems: state.items
         }))
     );
-        // popup 제어용
+
     type PopupConfig = Omit<PopupProps, 'onClose'>;
-    const [popupConfig, setPopupConfig] = useState<PopupConfig| null>(null);
+    const [popupConfig, setPopupConfig] = useState<PopupConfig | null>(null);
+
     const allDelete = () => {
         setPopupConfig({
-          type: "confirm",
-          state: "confirm",
-          title: "장바구니 비우기",
-          content: "전체가 삭제됩니다. 진행하시겠습니까?",
-          onConfirm: () => {
-            clearCart();
-            setPopupConfig(null);
+            type: "confirm",
+            state: "confirm",
+            title: "장바구니 비우기",
+            content: "전체가 삭제됩니다. 진행하시겠습니까?",
+            onConfirm: () => {
+                clearCart();
+                setPopupConfig(null);
+                setPopupConfig({
+                    type: "alert",
+                    state: "success",
+                    title: "성공",
+                    content: "장바구니가 비워졌습니다."
+                });
+            }
+        });
+    };
+
+    const handleIncrease = (id: string) => {
+        const res = updateQuantity(id, 'plus');
+        console.log(res);
+        if (!res.success && res.reason === 'STOCK_LIMIT') {
             setPopupConfig({
                 type: "alert",
-                state: "success",
-                title: "성공",
-                content: "장바구니가 비워졌습니다."
+                state: "error",
+                title: "재고 제한",
+                content: "더 이상 수량을 늘릴 수 없습니다. 잔여 재고가 부족합니다."
             });
-          }
-        });
-    }
+        }
+    };
 
-    const handleIncrease = (id:string) => { updateQuantity(id, 'plus'); }
-    const handleDecrease = (id:string) => { updateQuantity(id, 'minus'); }
-    
-    const handleRemove = (id:string) => { removeItem(id); }
+    const handleDecrease = (id: string) => {
+        const res = updateQuantity(id, 'minus');
+        if (!res.success && res.reason === 'MIN_LIMIT') {
+            setPopupConfig({
+                type: "alert",
+                state: "error",
+                title: "수량 제한",
+                content: "최소 수량은 1개입니다. 삭제를 원하시면 삭제 버튼을 눌러주세요."
+            });
+        }
+    };
 
-    // 리스트가 3개만 노출
-    const mapArr = cartItems.length > 3 ? [...cartItems.slice(0,3)]:[...cartItems];
-    return(
+    const handleRemove = (id: string) => {
+        removeItem(id);
+    };
+
+    const mapArr = cartItems.length > 3 ? [...cartItems.slice(0, 3)] : [...cartItems];
+
+    return (
         <>
-            <nav className={`sideBarCart ${isOpen ? 'open':''}`}>
+            <nav className={`sideBarCart ${isOpen ? 'open' : ''}`}>
                 <div className="closeWrap">
                     <h2>장바구니</h2>
                     <p className="closeBtn" title="장바구니 닫기" onClick={onClose}>
-                        <MdOutlineClose/>
+                        <MdOutlineClose />
                     </p>
                 </div>
                 <div className="deleteWrap" >
-                    <p title="전부 삭제" onClick={allDelete}><MdDelete/>전부 삭제</p>
+                    <p title="전부 삭제" onClick={allDelete}><MdDelete />전부 삭제</p>
                 </div>
                 <div className="cartWrap">
-                    {
-                        mapArr.map((p) => (
-                             <SelectedItemCard
-                                key={p.id}
-                                id={p.id}
-                                title={p.title}
-                                variant="sidebar"
-                                productId={p.productId}
-                                color={p.color}
-                                size={p.size}
-                                price={p.price}
-                                quantity={p.quantity}
-                                onIncrease={() => {handleIncrease(p.id)}}
-                                onDecrease={() => {handleDecrease(p.id)}}
-                                onRemove={() => {handleRemove(p.id)}}
-                            />
-                        ))
-                    }
+                    {mapArr.map((p) => (
+                        <SelectedItemCard
+                            key={p.id}
+                            id={p.id}
+                            title={p.title}
+                            variant="sidebar"
+                            productId={p.productId}
+                            color={p.color}
+                            size={p.size}
+                            price={p.price}
+                            quantity={p.quantity}
+                            onIncrease={handleIncrease}
+                            onDecrease={handleDecrease}
+                            onRemove={handleRemove}
+                        />
+                    ))}
                 </div>
-                <div className="showViewBtn btn primary full"><Link to='/cart'> 장바구니 전체보기 ({cartItems.length}) <MdArrowForwardIos/></Link></div>
+                <div className="showViewBtn btn primary full">
+                    <Link to='/cart'>
+                        장바구니 전체보기 ({cartItems.length}) <MdArrowForwardIos />
+                    </Link>
+                </div>
             </nav>
-            {popupConfig && <BasePopup
-                            key={popupConfig.type}
-                            type={popupConfig.type}
-                            state={popupConfig.state}
-                            title={popupConfig.title}
-                            content={popupConfig.content}
-                            onConfirm={popupConfig.onConfirm}
-                            onClose={() => setPopupConfig(null)} // [닫기] 혹은 [취소] 시 null로 초기화
-                        />}
+            {popupConfig && (
+                <BasePopup
+                    key={popupConfig.type}
+                    type={popupConfig.type}
+                    state={popupConfig.state}
+                    title={popupConfig.title}
+                    content={popupConfig.content}
+                    onConfirm={popupConfig.onConfirm}
+                    onClose={() => setPopupConfig(null)}
+                />
+            )}
         </>
-    )
-}
+    );
+};

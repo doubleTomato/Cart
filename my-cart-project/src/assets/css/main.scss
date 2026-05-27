@@ -238,6 +238,7 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
 // 컴포넌트
 // 선택된 아이템
 .selectProductWrap{
+      @include focus-none;
       @include box-shadow-default;
       background-color: $sub_color;
       padding: 10px 20px;
@@ -304,7 +305,7 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
   .home{ 
     width: 100%;
     .sliderWrap{ 
-      width: 100%; height: 475px; background-color: palegreen;
+      width: 100%; height: 475px; background-color: #ccc;;
       .swiper{
         height: 100%;
         .overflow-hidden {height: 100%;}
@@ -346,7 +347,7 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
       .cardItem{ 
         width: calc( 25% - 20px );
         padding: 5px 10px; box-sizing: border-box;
-        .imgWrap{ width: 100%; height: 275px; background-color: aqua; margin-top: 10px;}
+        .imgWrap{ width: 100%; height: 275px; background-color: #ccc; margin-top: 10px;}
         .textWrap{
           margin-top: 10px;
           .tit{ font-size: 1.35rem; font-weight: 500;  @include ellipsis}
@@ -381,7 +382,10 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
     // 이미지 슬라이드
     & > div{ width: 45%;}
     .leftContent{
-      & > div{ width: 100%; height: 500px; background-color: rgb(162, 215, 165);}
+      @include focus-none;
+      & > div{ width: 100%; height: 500px; background-color: #ccc;
+        .mainImg{ width: 100%; height: 100%; object-fit: cover; }
+      }
       & > ul { width: 100%; display: flex; height: 80px; gap: 10px; margin-top: 20px;
           li { 
             width: 80px; height: 100%; opacity: 0.7; background-color: $sub_color;
@@ -407,7 +411,12 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
     .rightContent{
 
       & > div > * { margin-top: 20px;}
-      h1{font-size: 1.5rem; font-weight: 400;}
+      h1{font-size: 1.5rem; font-weight: 400; display: flex; align-items: center; gap: 10px;
+        .badge{font-size: 0.9rem; padding: 2.5px 5px;}
+        &.best{ .badge{ background-color: $best_color;}}
+        &.new{ .badge{ background-color: $new_color;}}
+        &.sale{ .badge{ background-color: $sale_color;}}
+      }
       .saleType{ // saleType별 색상 지정 보류 중
         font-size: 0.9rem;
         background-color: $point_color; color: #fff; 
@@ -471,7 +480,7 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
       .productList{
         li{ 
           display: flex; justify-content: space-between; align-items: baseline;
-          .selectProductWrap{ box-shadow: none; border-width: 0px;}
+          .selectProductWrap{ box-shadow: none; border-width: 0px; }
         }
       }
     }
