@@ -73,7 +73,7 @@ export interface Product {
 
   shortDescription: string;
 
-  saleType?: SaleType;
+  saleType: SaleType;
 
   shippingPolicyId: string;
 

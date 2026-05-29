@@ -1,3 +1,4 @@
+/*
 import { SelectedItemCard } from "@/components/product/SelectProduct";
 import type { PopupProps } from "@/shared/types/popup";
 import { useCartStore } from "@/stores/useCartStore";
@@ -83,4 +84,4 @@ export default function CartPage() {
         </div>
     </div>
     )
-}
+}*/

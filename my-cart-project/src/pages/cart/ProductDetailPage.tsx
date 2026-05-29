@@ -67,9 +67,11 @@ export default function ProductDetailPage() {
 
     const handleAddToCart = () => {
         if(selectedProducts.length === 0) return;
-        selectedProducts.map((v) => (
-            addItem(v)
-        ));
+        
+        selectedProducts.forEach((v) => {
+            console.log('in_v',v);
+           return  addItem(v)
+        });
         // alert("장바구니에 담겼습니다!");
          setPopupConfig({
             type:"alert", state:"success", 
@@ -186,6 +188,14 @@ const handleIncrease = (id: string | number) => {
 
         const optionPrice = discountedPrice + (selectedOption.additionalPrice || 0);
 
+        const newSelectedItem = { id: targetCombinationId,
+                title: products.title,
+                productId: products.id,
+                color: String(curColor),
+                size: String(curSize),
+                price: optionPrice,
+                quantity: 1,
+                maxStock: Number(selectedOption?.stock ?? 0)}
         setSelectedProducts(prev => [
             ...prev,
             {
@@ -199,7 +209,7 @@ const handleIncrease = (id: string | number) => {
                 maxStock: Number(selectedOption?.stock ?? 0)
             }
         ]);
-
+        console.log("새로 추가되는 아이템 명세:", newSelectedItem);
         setFilters({ color: undefined, size: undefined });
     };
 
@@ -233,7 +243,7 @@ const handleIncrease = (id: string | number) => {
             </div>
             <div className='rightContent'>
                 <div className='productInfo'>
-                    <h1>{products?.saleType !== 'NORMAL' && <p className='saleType'>{products?.saleType !== 'NORMAL' && sales?.[products?.saleType].label}</p>} {products?.title}</h1>
+                    <h1>{products?.saleType !== 'NORMAL' && <p className='saleType'>{sales?.[products?.saleType || 'NORMAL'].label}</p>} {products?.title}</h1>
                     
                     <p className='desc'>{products?.detail.description}</p>
                     <div className='ratingWrap'></div>
@@ -282,6 +292,7 @@ const handleIncrease = (id: string | number) => {
                             size={p.size}
                             productId={p.productId}
                             price={discountedPrice}
+                            maxStock={p.maxStock}
                             quantity={p.quantity}
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}

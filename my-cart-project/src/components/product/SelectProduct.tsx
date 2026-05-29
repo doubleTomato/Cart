@@ -10,6 +10,7 @@ export const SelectedItemCard = ({
     quantity,
     variant = 'detail',
     title,
+    maxStock,
     onIncrease,
     onDecrease,
     onRemove
@@ -26,7 +27,7 @@ export const SelectedItemCard = ({
                 <div className="countBox">
                     <div className={`btn inherit ${quantity === 1 ? 'disabled' : ''}`} onClick={() => onDecrease(id)}><FaMinus /></div>
                     <div>{quantity}</div>
-                    <div className="btn inherit" onClick={() => onIncrease(id)}><FaPlus /></div>
+                    <div className={`btn inherit ${quantity === maxStock ? 'disabled' : ''}`} onClick={() => onIncrease(id)}><FaPlus /></div>
                 </div>
                 <p className="price">{(price * quantity).toLocaleString()}원</p>
             </dd>

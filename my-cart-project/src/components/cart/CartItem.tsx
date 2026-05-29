@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Image } from "../common/Image";
 import type { Product } from '@/shared/types/product';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
-import { getProductById, getSaleInfo } from "@/api/productService";
+import { getSaleInfo } from "@/api/productService";
 import type { DiscountPolicyValue } from "@/shared/policy/discountPolicy";
 
 interface ProductProps {
@@ -45,7 +45,7 @@ export const CardItem = ( { product } : ProductProps ) => {
                     <p className="tit">{title}</p>
                     <p className="desc">{description}</p>
                     <div className="priceBox">
-                        {saleType !== 'NORMAL' && <span className={`discountRate ${saleType.toLowerCase()}`}>{saleType}</span>}
+                        {saleType !== 'NORMAL' && <span className={`discountRate ${saleType?.toLowerCase()}`}>{saleType}</span>}
                         <span className={saleType !== 'NORMAL' ? 'originPrice' : 'price'}>{basePrice.toLocaleString() ?? 0}원</span>
                         {saleType !== 'NORMAL' && <p className="price">{discountedPrice.toLocaleString()}원</p>}
                     </div>

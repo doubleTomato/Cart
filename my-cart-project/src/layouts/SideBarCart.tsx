@@ -99,6 +99,7 @@ export const SideBarCart = ({ isOpen, onClose }: SideBarProps) => {
                             size={p.size}
                             price={p.price}
                             quantity={p.quantity}
+                            maxStock={p.maxStock}
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
                             onRemove={handleRemove}
