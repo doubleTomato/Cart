@@ -1,5 +1,5 @@
 // shared/types/product.ts
-
+export const SALE_TYPES = ["NEW", "BEST", "SALE", "NORMAL"] as const;
 export type SaleType =
   | "NEW"
   | "BEST"

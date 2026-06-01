@@ -48,7 +48,9 @@ img, picture, video, canvas, svg {
   max-width: 100%;
   height: auto;
 }
-img{ object-fit: cover; height: 100%; width: 100%;}
+img{ object-fit: cover; height: 100%; width: 100%; width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;}
 button, input, select, textarea {
   font: inherit;
   background: transparent;

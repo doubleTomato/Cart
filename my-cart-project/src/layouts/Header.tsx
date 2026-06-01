@@ -1,5 +1,4 @@
 import { CiShoppingCart } from "react-icons/ci";
-import { Image } from "@/components/common/Image";
 import { useCartStore } from "../stores/useCartStore";
 import { Link } from "react-router-dom";
 import { useShallow } from "zustand/shallow";
@@ -19,10 +18,10 @@ export const Header = ({onToggle}:HeaderProps) => {
         <header className="headerWrap">
             <div className="logo">
                 <Link to="/">
-                    <Image 
+                    <img
                     src="/images/mogumogu-logo.png" 
                     alt="서비스 로고" 
-                    classN="logo-image"/>
+                    className="logo-image"/>
                 </Link>
             </div>
             <ul className="rightContent">

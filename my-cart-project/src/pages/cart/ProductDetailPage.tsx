@@ -17,12 +17,6 @@ export default function ProductDetailPage() {
     const [sales, setSales] = useState<Record<DiscountPolicyKey, DiscountPolicyValue>>({});
     const [isLoading, setIsLoading] = useState(true);
 
-    // const [filters, setFilters] = useState({
-    //     color: undefined as SelectOption | string | undefined,
-    //     size: undefined as SelectOption | string | undefined,
-    // });
-
-
     const [filters, setFilters] = useState({
     color: undefined as string | undefined,
     size: undefined as ProductVariant | undefined,
@@ -84,7 +78,7 @@ export default function ProductDetailPage() {
     Array.from(new Set(products?.variants.map((v) =>(v.color))) || []),
     [products?.variants]
     );
-
+console.log(colorOptions);
     const sizeOptions = useMemo(() => {
         if (!filters.color) return [];
         return products?.variants.filter((v) => v.color === filters.color)   ;

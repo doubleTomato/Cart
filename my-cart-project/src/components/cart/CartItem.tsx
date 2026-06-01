@@ -5,7 +5,8 @@ import { Image } from "../common/Image";
 import type { Product } from '@/shared/types/product';
 import { getDiscountedPrice } from '@/shared/utils/priceFunc';
 import { getSaleInfo } from "@/api/productService";
-import type { DiscountPolicyValue } from "@/shared/policy/discountPolicy";
+import  { type DiscountPolicyValue, DISCOUNT_POLICIES } from "@/shared/policy/discountPolicy";
+
 
 interface ProductProps {
   product: Product; 
@@ -13,6 +14,8 @@ interface ProductProps {
 
 export const CardItem = ( { product } : ProductProps ) => {
     // console.log(product);
+    
+
     const {id, detail, saleType, title, basePrice} = product;
     const { description, contentImages } = detail;
     const [sales, setSales] = useState<Record<string, DiscountPolicyValue>>({});
@@ -39,13 +42,13 @@ export const CardItem = ( { product } : ProductProps ) => {
                     src={contentImages[0]} 
                     alt="서비스 로고" 
                     classN="logo-image"/>
-                    <span className="badge sale"></span>
+                {saleType !== 'NORMAL' && <span className={`badge discountRate ${saleType?.toLowerCase()}`}>{saleType}</span>}
                 </div>
                 <div className="textWrap">
                     <p className="tit">{title}</p>
                     <p className="desc">{description}</p>
                     <div className="priceBox">
-                        {saleType !== 'NORMAL' && <span className={`discountRate ${saleType?.toLowerCase()}`}>{saleType}</span>}
+                        {saleType !== 'NORMAL' && <p className="rate">{DISCOUNT_POLICIES[saleType].rate}%</p>}
                         <span className={saleType !== 'NORMAL' ? 'originPrice' : 'price'}>{basePrice.toLocaleString() ?? 0}원</span>
                         {saleType !== 'NORMAL' && <p className="price">{discountedPrice.toLocaleString()}원</p>}
                     </div>
