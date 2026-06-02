@@ -19,40 +19,56 @@ import { SALE_TYPES, type SaleType } from '@/shared/types/product';
 
 
 export default function ProductListPage() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8; // 페이지 별 노출 갯수
-    const totalPages = Math.ceil(PRODUCTS.length / itemsPerPage); // 전체 페이지 갯수
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProducts = PRODUCTS.slice(indexOfFirstItem, indexOfLastItem);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [order, setOrder] = useState('높은 할인 순');
+  const [tab, setTab] = useState<SaleType | 'ALL'>('ALL');
+  const itemsPerPage = 8; // 페이지 별 노출 갯수
+  
     
     
-    const orderBy = ['높은 할인 순','높은 가격 순','낮은 가격 순'];
-    const banners = [
-    { 
-      id: 1, 
-      imgUrl: "/images/banners/banner1.jpg", 
-      link: "/promotion/1",
-      badge: "NEW ARRIVALS",
-      title: "익숙함에 특별함을 더한, 우리의 매일",
-      highlight: "우리의 매일",
-      description: "탄탄한 소재와 정제된 실루엣으로 완성하는 데일리 룩 리스트를 만나보세요."
-    },
-    { 
-      id: 2, 
-      imgUrl: "/images/banners/banner2.jpg", 
-      link: "/product/45",
-      badge: "SEASON OFF",
-      title: "계절을 닮은 단정함에 대하여",
-      highlight: "단정함에 대하여",
-      description: "가볍게 걸치기 좋은 오버핏 셔츠부터 트렌디한 와이드 데님까지"
-    }
+  const orderBy = ['높은 할인 순','높은 가격 순','낮은 가격 순'];
+  const banners = [
+  { 
+    id: 1, 
+    imgUrl: "/images/banners/banner1.jpg", 
+    link: "/promotion/1",
+    badge: "NEW ARRIVALS",
+    title: "익숙함에 특별함을 더한, 우리의 매일",
+    highlight: "우리의 매일",
+    description: "탄탄한 소재와 정제된 실루엣으로 완성하는 데일리 룩 리스트를 만나보세요."
+  },
+  { 
+    id: 2, 
+    imgUrl: "/images/banners/banner2.jpg", 
+    link: "/product/45",
+    badge: "SEASON OFF",
+    title: "계절을 닮은 단정함에 대하여",
+    highlight: "단정함에 대하여",
+    description: "가볍게 걸치기 좋은 오버핏 셔츠부터 트렌디한 와이드 데님까지"
+  }
   ];
-    const [order, setOrder] = useState('높은 할인 순');
-    const [tab, setTab] = useState<SaleType | 'ALL'>('ALL');
 
-    return (    
+  const handleTabChange = (selectedTab: SaleType | 'ALL') => {
+      setTab(selectedTab);
+      setCurrentPage(1);
+  };
+
+  const filterdProducts = PRODUCTS
+  .filter((x) => tab === 'ALL' || x.saleType === tab)
+  .sort((a, b) => {
+      // console.log(order);
+    if (order === '높은 가격 순') return (b.basePrice * (1 - (DISCOUNT_POLICIES[b.saleType].rate / 100))) - (a.basePrice * (1 - (DISCOUNT_POLICIES[a.saleType].rate / 100)));
+    if (order === '낮은 가격 순') return (a.basePrice * (1 - (DISCOUNT_POLICIES[a.saleType].rate / 100))) - (b.basePrice * (1 - (DISCOUNT_POLICIES[b.saleType].rate / 100)));
+    if (order === '높은 할인 순') return DISCOUNT_POLICIES[b.saleType].rate - DISCOUNT_POLICIES[a.saleType].rate;
+    return 0;
+  });
+
+  const totalPages = Math.ceil(filterdProducts.length / itemsPerPage) || 1; // 전체 페이지 갯수
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = filterdProducts.slice(indexOfFirstItem, indexOfLastItem);
+  return (    
         <div className="home">
             <div className="sliderWrap">
               <Swiper
@@ -94,10 +110,10 @@ export default function ProductListPage() {
             <div className="bottomContent">
                 <nav className="tabWrap">
                     <ul className='tabCon'>
-                        <li className={'ALL' === tab ? 'active':''} onClick={() => setTab('ALL')}>ALL</li>
+                        <li className={'ALL' === tab ? 'active':''} onClick={() => handleTabChange('ALL')}>ALL</li>
                         {
                             SALE_TYPES.map((x) => (
-                                <li onClick={() => setTab(x)} className={x === tab ? 'active':''} key={x}>{x}</li>
+                                <li onClick={() => handleTabChange(x)} className={x === tab ? 'active':''} key={x}>{x}</li>
                             ))
                         }
                     </ul>
@@ -118,14 +134,7 @@ export default function ProductListPage() {
                 <div className="listWrap">
                     {
                     currentProducts
-                    .filter((x) => tab === 'ALL' || x.saleType === tab)
-                    .sort((a, b) => {
-                        console.log(order);
-                      if (order === '높은 가격 순') return (b.basePrice * (1 - (DISCOUNT_POLICIES[b.saleType].rate / 100))) - (a.basePrice * (1 - (DISCOUNT_POLICIES[a.saleType].rate / 100)));
-                      if (order === '낮은 가격 순') return (a.basePrice * (1 - (DISCOUNT_POLICIES[a.saleType].rate / 100))) - (b.basePrice * (1 - (DISCOUNT_POLICIES[b.saleType].rate / 100)));
-                      if (order === '높은 할인 순') return DISCOUNT_POLICIES[b.saleType].rate - DISCOUNT_POLICIES[a.saleType].rate;
-                      return 0;
-                    }).map((x) => <CardItem key={x.id} product={x} />)  
+                    .map((x) => <CardItem key={x.id} product={x} />)  
                     }
                 </div>
             </div>
