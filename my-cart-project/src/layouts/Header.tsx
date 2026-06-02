@@ -19,7 +19,7 @@ export const Header = ({onToggle}:HeaderProps) => {
             <div className="logo">
                 <Link to="/">
                     <img
-                    src="/images/mogumogu-logo.png" 
+                    src="/images/mogumogu-logo_.png" 
                     alt="서비스 로고" 
                     className="logo-image"/>
                 </Link>

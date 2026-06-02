@@ -232,7 +232,8 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
   .logo{
     .logo-image{
       width: 200px;
-      height: 100px;
+      height: 60px;
+      object-fit: contain;
     }
   }
 }
