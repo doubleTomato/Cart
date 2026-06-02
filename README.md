@@ -4,6 +4,30 @@ React 19와 TypeScript를 기반으로 제작한 패션 쇼핑몰 프론트엔�
 예외 처리 등 실제 서비스에서 발생할 수 있는 다양한 도메인 상황을 고려하여 견고하게 구현했습니다.
 
 ---
+### 메인 페이지
+
+![메인 페이지](./my-cart-project/screen/home_list.PNG)
+
+#### 메인 페이지의 Tab + Pagination
+![메인 페이지의 Tab + Pagination](./my-cart-project/screen/tab-pagination.PNG)
+
+### 상품 상세 페이지 + 장바구니 Drawer
+
+![상품 상세 페이지](./my-cart-project/screen/detail_cart.PNG)
+
+### 상세 페이지의 선택된 상품
+![상품 상세의 선택된 상품](./my-cart-project/screen/select_add_card.PNG)
+
+### 상세 페이지의 커스텀 Select
+![상품 상세의 커스텀 Select](./my-cart-project/screen/select_d.PNG)
+
+### Custom Popup
+
+![Custom Popup - Alert](./my-cart-project/screen/alert.PNG)
+![Custom Popup - Confirm](./my-cart-project/screen/confirm.PNG)
+
+
+---
 
 ## 🛠️ Tech Stack
 
