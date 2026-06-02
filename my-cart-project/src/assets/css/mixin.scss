@@ -77,3 +77,28 @@
   transition: $kind 0.2s ease, transform 0.2s ease;
 }
 
+
+// 스크롤바
+@mixin custom-scrollbar {
+  scrollbar-width: thin; // firefox
+  scrollbar-color: $scrollbar-thumb $scrollbar-track;
+
+  &::-webkit-scrollbar {
+    width: $scrollbar-width;
+    height: $scrollbar-width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $scrollbar-track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb;
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar-thumb-hover;
+  }
+}

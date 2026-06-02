@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useCartStore } from "@/stores/useCartStore";
 import { SelectedItemCard } from "@/components/product/SelectProduct";
 import { useShallow } from "zustand/shallow";
-import { MdDelete, MdArrowForwardIos, MdOutlineClose } from "react-icons/md";
+import { MdDelete, MdOutlineClose } from "react-icons/md";
 import type { PopupProps } from "@/shared/types/popup";
 import { BasePopup } from "@/components/common/popup/BasePopup";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 interface SideBarProps {
     isOpen: boolean;
@@ -73,7 +73,7 @@ export const SideBarCart = ({ isOpen, onClose }: SideBarProps) => {
         removeItem(id);
     };
 
-    const mapArr = cartItems.length > 3 ? [...cartItems.slice(0, 3)] : [...cartItems];
+    // const mapArr = cartItems.length > 3 ? [...cartItems.slice(0, 3)] : [...cartItems];
 
     return (
         <>
@@ -88,7 +88,7 @@ export const SideBarCart = ({ isOpen, onClose }: SideBarProps) => {
                     <p title="전부 삭제" onClick={allDelete}><MdDelete />전부 삭제</p>
                 </div>
                 <div className="cartWrap">
-                    {mapArr.map((p) => (
+                    {cartItems.map((p) => (
                         <SelectedItemCard
                             key={p.id}
                             id={p.id}
@@ -106,11 +106,11 @@ export const SideBarCart = ({ isOpen, onClose }: SideBarProps) => {
                         />
                     ))}
                 </div>
-                <div className="showViewBtn btn primary full">
+                {/* <div className="showViewBtn btn primary full">
                     <Link to='/cart'>
                         장바구니 전체보기 ({cartItems.length}) <MdArrowForwardIos />
                     </Link>
-                </div>
+                </div> */}
             </nav>
             {popupConfig && (
                 <BasePopup

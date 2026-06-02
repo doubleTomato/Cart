@@ -300,8 +300,8 @@ const handleIncrease = (id: string | number) => {
                         <p>{totalRe.price.toLocaleString()}원</p>
                    </div>
                     <div className='buttonWrap'>
-                        <button className='btn primary lg'>바로구매</button>
-                        <button className={`btn secondary lg ${selectedProducts.length === 0 && 'disabled'}`} onClick={handleAddToCart}>장바구니 추가</button>
+                        {/* <button className='btn primary lg'>바로구매</button> */}
+                        <button className={`btn primary lg ${selectedProducts.length === 0 && 'disabled'}`} onClick={handleAddToCart}>장바구니 추가</button>
                     </div>
                 </div>
                 <hr/>

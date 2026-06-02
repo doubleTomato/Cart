@@ -173,7 +173,7 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
   width: 25%;
   padding: 0 10px;
   box-sizing: border-box;
-  background-color: rgba(239, 239, 239, 0.9);
+  background-color: rgba(239, 239, 239, 0.95);
   @include box-shadow-default;
   @include animate-default(right);
   &.open{right: 0;}
@@ -203,6 +203,11 @@ hr{margin: 20px 10px; opacity: 0.3; width: 100%;}
     & > a{
       display: flex; align-items:center;
     }
+  }
+  .cartWrap{
+    max-height: calc(100dvh - 230px);
+    overflow-y: auto;
+    @include custom-scrollbar;
   }
 }
 
